@@ -1,11 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lowkey Drip</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+  <header>
+    <h1>LOwkey Drip</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#" class="active">Catalog</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Barra de busca -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="🔍 Search products...">
+    </div>
+
+    <!-- Filtros -->
+    <div class="filters">
+      <button class="filter-btn active" data-category="all">All</button>
+      <button class="filter-btn" data-category="clothing">Clothing</button>
+      <button class="filter-btn" data-category="sneakers">Sneakers</button>
+      <button class="filter-btn" data-category="accessories">Accessories</button>
+    </div>
+
+    <!-- Grade de produtos -->
+    <div class="products" id="productList"></div>
+  </main>
+
+  <footer>
+    Desenvolvido por Heitor © 2025
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
