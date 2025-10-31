@@ -94,6 +94,36 @@ app.get("/api/user-count", async (req, res) => {
     }
 });
 
+/*
+  ======================================================
+   NOVA ROTA - (Vinda do catalogo/server.js)
+  ======================================================
+*/
+/**
+ * ROTA: Buscar todos os produtos
+ * GET /api/produtos
+ * (Usada na página de catálogo)
+ */
+app.get("/api/produtos", async (req, res) => {
+    try {
+        // 1. Buscar todos os produtos da nova tabela 'produtos'
+        const sql = "SELECT * FROM produtos";
+        const [produtos] = await pool.query(sql);
+        
+        // 2. Enviar os produtos como JSON
+        res.json(produtos);
+
+    } catch (error) {
+        console.error("Erro ao buscar produtos:", error);
+        res.status(500).json({ message: "Erro interno do servidor." });
+    }
+});
+/*
+  ======================================================
+   FIM DA NOVA ROTA
+  ======================================================
+*/
+
 
 // Rota para Registro (para depois)
 app.post("/api/register", async (req, res) => {
