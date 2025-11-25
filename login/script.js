@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const toastMessage = document.getElementById("toast-message");
 
     // URL base do seu backend
-    const API_URL = "http://localhost:3000"; // Nosso backend vai rodar aqui
+   const API_URL = "http://localhost/tcc/api"; // Nosso backend vai rodar aqui
 
     // --- Funções Auxiliares ---
 
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // <-- ISSO MUDOU (Início) -->
         try {
             // Envia os dados para o backend
-            const response = await fetch(`${API_URL}/api/login`, {
+            const response = await fetch(`${API_URL}/login.php`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email: email, password: password })
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // <-- ISSO MUDOU (Início) -->
         try {
             // Busca o contador do backend
-            const response = await fetch(`${API_URL}/api/user-count`);
+            const response = await fetch(`${API_URL}/user-count.php`);
             const data = await response.json();
 
             if (data.count) {

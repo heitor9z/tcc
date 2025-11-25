@@ -3,13 +3,13 @@ const filtroBtns = document.querySelectorAll(".filter-btn");
 const buscaInput = document.getElementById("searchInput");
 
 // <-- ADICIONADO PARA ORGANIZAR (igual ao login/script.js) -->
-const API_URL = "http://localhost:3000"; 
+const API_URL = "http://localhost/tcc/api";
 
 // Buscar produtos da API
 async function fetchProdutos() {
   try {
     // <-- ROTA ATUALIZADA -->
-    const res = await fetch(`${API_URL}/api/produtos`); // Era /produtos
+    const res = await fetch(`${API_URL}/produtos.php`); // Era /produtos
     const produtos = await res.json();
     return produtos;
   } catch (err) {
@@ -39,8 +39,8 @@ async function mostrarProdutos(filtro = "all", busca = "") {
     card.classList.add("product-card");
     
     // Convertendo as cores/tamanhos (que vêm do MySQL como String JSON) para Arrays
-    const cores = p.cores ? JSON.parse(p.cores) : [];
-    const tamanhos = p.tamanhos ? JSON.parse(p.tamanhos) : [];
+  const cores = p.cores || [];
+  const tamanhos = p.tamanhos || [];
 
     card.innerHTML = `
       <img src="${p.imagem}" alt="${p.nome}">
