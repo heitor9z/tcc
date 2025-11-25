@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Lowkey Drip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="logo">LOWKEY <span class="text-blue">DRIP</span></div>
+            <nav class="menu">
+                <button class="menu-btn active" onclick="showTab('pedidos')">📦 Pedidos / Vendas</button>
+                <button class="menu-btn" onclick="showTab('produtos')">👕 Gerenciar Estoque</button>
+                <button class="menu-btn" onclick="showTab('novo')">➕ Adicionar Produto</button>
+            </nav>
+            <div class="logout-area">
+                <a href="../catalogo/index.html" class="logout-btn">Voltar à Loja</a>
+            </div>
+        </aside>
+
+        <main class="content">
+            <section id="tab-pedidos" class="tab-content active">
+                <h1>Vendas Realizadas</h1>
+                <p class="subtitle">Acompanhe o fluxo de caixa e entregas.</p>
+                <div id="orders-list" class="orders-grid"><p>Carregando...</p></div>
+            </section>
+
+            <section id="tab-produtos" class="tab-content hidden">
+                <h1>Catálogo & Estoque</h1>
+                <p class="subtitle">Edite disponibilidade, preços e remova itens.</p>
+                <div class="products-table-wrapper">
+                    <table class="products-table">
+                        <thead>
+                            <tr>
+                                <th>Ref</th>
+                                <th>Produto</th>
+                                <th>Preço</th>
+                                <th>Cores/Tam</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="products-list-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="tab-novo" class="tab-content hidden">
+                <h1>Adicionar Novo Produto</h1>
+                <div class="form-card">
+                    <form id="product-form">
+                        <div class="form-row">
+                            <div class="form-group"><label>Nome</label><input type="text" id="nome" required></div>
+                            <div class="form-group"><label>Preço</label><input type="number" id="preco" step="0.01" required></div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group"><label>Categoria</label>
+                                <select id="categoria">
+                                    <option value="clothing">Roupas</option>
+                                    <option value="sneakers">Tênis</option>
+                                    <option value="accessories">Acessórios</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>URL Imagem</label><input type="text" id="imagem" required></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Cores Disponíveis</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="cor" value="#000000"> Preto</label>
+                                <label><input type="checkbox" name="cor" value="#ffffff"> Branco</label>
+                                <label><input type="checkbox" name="cor" value="#ff0000"> Vermelho</label>
+                                <label><input type="checkbox" name="cor" value="#3b82f6"> Azul</label>
+                                <label><input type="checkbox" name="cor" value="#eab308"> Amarelo</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Tamanhos Disponíveis</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="tamanho" value="S"> S</label>
+                                <label><input type="checkbox" name="tamanho" value="M"> M</label>
+                                <label><input type="checkbox" name="tamanho" value="L"> L</label>
+                                <label><input type="checkbox" name="tamanho" value="XL"> XL</label>
+                                <label><input type="checkbox" name="tamanho" value="40"> 40</label>
+                                <label><input type="checkbox" name="tamanho" value="42"> 42</label>
+                                <label><input type="checkbox" name="tamanho" value="44"> 44</label>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-submit">Cadastrar Produto</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="edit-modal" class="modal-overlay hidden">
+        <div class="modal-content admin-modal">
+            <button class="close-modal" onclick="closeEditModal()">&times;</button>
+            <h2>Editar Produto</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id">
+                
+                <div class="form-group"><label>Nome</label><input type="text" id="edit-nome" required></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Preço</label><input type="number" id="edit-preco" step="0.01" required></div>
+                    <div class="form-group"><label>Categoria</label>
+                        <select id="edit-categoria">
+                            <option value="clothing">Roupas</option>
+                            <option value="sneakers">Tênis</option>
+                            <option value="accessories">Acessórios</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group"><label>URL Imagem</label><input type="text" id="edit-imagem" required></div>
+
+                <div class="form-group">
+                    <label>Estoque de Cores</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="edit-cor" value="#000000"> Preto</label>
+                        <label><input type="checkbox" name="edit-cor" value="#ffffff"> Branco</label>
+                        <label><input type="checkbox" name="edit-cor" value="#ff0000"> Vermelho</label>
+                        <label><input type="checkbox" name="edit-cor" value="#3b82f6"> Azul</label>
+                        <label><input type="checkbox" name="edit-cor" value="#eab308"> Amarelo</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Estoque de Tamanhos</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="edit-tamanho" value="S"> S</label>
+                        <label><input type="checkbox" name="edit-tamanho" value="M"> M</label>
+                        <label><input type="checkbox" name="edit-tamanho" value="L"> L</label>
+                        <label><input type="checkbox" name="edit-tamanho" value="XL"> XL</label>
+                        <label><input type="checkbox" name="edit-tamanho" value="40"> 40</label>
+                        <label><input type="checkbox" name="edit-tamanho" value="42"> 42</label>
+                        <label><input type="checkbox" name="edit-tamanho" value="44"> 44</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

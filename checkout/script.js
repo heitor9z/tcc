@@ -1,4 +1,4 @@
-// checkout/script.js (ATUALIZADO)
+// checkout/script.js
 
 // --- Elementos do DOM ---
 const itemsContainer = document.getElementById("checkout-items");
@@ -21,9 +21,9 @@ const carrinho = JSON.parse(localStorage.getItem('drip_carrinho')) || [];
 const frete = 12.99;
 const descontoPix = 0.05; // 5%
 let totalFinalParaPix = 0; 
-let checkInterval = null; // Variável para controlar o loop de verificação
+let checkInterval = null; 
 
-// --- CLASSE PIX (MANTIDA IGUAL) ---
+// --- CLASSE PIX ---
 class Pix {
     constructor(chave, nome, cidade, txid, valor) {
         this.chave = chave;
@@ -54,11 +54,7 @@ class Pix {
 function renderCheckout() {
     itemsContainer.innerHTML = "";
     let subtotal = 0;
-
-    if (carrinho.length === 0) {
-        // window.location.href = "../catalogo/index.html"; 
-        return;
-    }
+    if (carrinho.length === 0) return;
 
     carrinho.forEach(item => {
         const totalItem = item.preco * item.quantidade;
@@ -91,94 +87,89 @@ function startTimer() {
     }, 1000);
 }
 
-// --- MONITORAMENTO AUTOMÁTICO (A Mágica acontece aqui) ---
+// --- MONITORAMENTO AUTOMÁTICO ---
 function monitorarPix(idTransacao) {
-    console.log("Iniciando monitoramento para ID:", idTransacao);
-    
-    // Limpa intervalo anterior se existir
     if (checkInterval) clearInterval(checkInterval);
-
-    // Pergunta pro servidor a cada 3 segundos
     checkInterval = setInterval(async () => {
         try {
-            // Chama o nosso arquivo PHP simulador
             const response = await fetch(`http://localhost/tcc/api/status_pix.php?id=${idTransacao}`);
             const data = await response.json();
-            
-            console.log("Status do Pix:", data.status);
-
             if (data.status === 'approved') {
-                // SUCESSO! O Banco (simulado) aprovou
-                clearInterval(checkInterval); // Para de perguntar
-                clearInterval(timerInterval); // Para o relógio
-                
-                // Feedback visual
-                const modalTitle = document.querySelector(".modal-header h2");
-                modalTitle.innerText = "Pagamento Aprovado! ✅";
-                modalTitle.style.color = "#10b981";
-                
-                qrImage.style.opacity = "0.5";
-                
-                // Redireciona automaticamente após 1.5s
-                setTimeout(() => {
-                    finalizarCompra();
-                }, 1500);
+                clearInterval(checkInterval);
+                clearInterval(timerInterval);
+                document.querySelector(".modal-header h2").innerText = "Pagamento Aprovado! ✅";
+                setTimeout(() => finalizarCompra(), 1500);
             }
-
-        } catch (error) {
-            console.error("Erro ao verificar pix:", error);
-        }
-    }, 3000); // 3000ms = 3 segundos
+        } catch (error) { console.error(error); }
+    }, 3000);
 }
 
-function finalizarCompra() {
-    localStorage.removeItem('drip_carrinho');
-    window.location.href = "../rastreamento/index.html";
+// --- FINALIZAR COMPRA (Salvar no Banco) ---
+async function finalizarCompra() {
+    const nome = document.getElementById("nome").value + " " + document.getElementById("sobrenome").value;
+    const email = document.getElementById("email").value;
+    const endereco = {
+        rua: document.getElementById("endereco").value,
+        cidade: document.getElementById("cidade").value,
+        estado: document.getElementById("estado").value,
+        cep: document.getElementById("cep").value
+    };
+
+    const pedidoData = {
+        cliente: { nome, email },
+        endereco: endereco,
+        total: totalFinalParaPix,
+        itens: carrinho
+    };
+
+    try {
+        await fetch("http://localhost/tcc/api/salvar_pedido.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(pedidoData)
+        });
+        
+        localStorage.removeItem('drip_carrinho');
+        window.location.href = "../rastreamento/index.html"; 
+    } catch (err) {
+        console.error(err);
+        window.location.href = "../rastreamento/index.html"; 
+    }
 }
 
-// --- Botão Finalizar ---
+// --- Event Listeners ---
 btnFinish.addEventListener("click", (e) => {
     e.preventDefault();
-    
     const inputs = document.querySelectorAll("input[required]");
     let valid = true;
     inputs.forEach(input => { if(!input.value) valid = false; });
     if(!valid) { alert("Preencha todos os campos."); return; }
 
-    // 1. Gera ID único para essa transação
     const ID_TRANSACAO = "LOD" + Math.floor(Math.random() * 100000);
-
-    // 2. Gera o Payload Pix
     const pix = new Pix("seu@email.com", "Lowkey Drip", "BRASILIA", ID_TRANSACAO, totalFinalParaPix);
     const payload = pix.getPayload();
 
-    // 3. Mostra na tela
     qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(payload)}`;
     copyInput.value = payload;
 
     modal.classList.remove("hidden");
     startTimer();
-    
-    // 4. Inicia o monitoramento automático
     monitorarPix(ID_TRANSACAO);
 });
 
-// --- Outros Botões ---
 closeModalBtn.addEventListener("click", () => {
     modal.classList.add("hidden");
     clearInterval(timerInterval);
-    clearInterval(checkInterval); // Para de monitorar se fechar
+    clearInterval(checkInterval);
 });
 
 btnCopy.addEventListener("click", () => {
     copyInput.select();
     navigator.clipboard.writeText(copyInput.value);
-    const originalText = btnCopy.innerText;
     btnCopy.innerText = "Copiado!";
-    setTimeout(() => btnCopy.innerText = originalText, 2000);
+    setTimeout(() => btnCopy.innerText = "Copiar", 2000);
 });
 
-// Botão Manual (Caso a automação falhe ou usuário queira ir logo)
 btnConfirmPayment.addEventListener("click", () => {
     btnConfirmPayment.innerText = "Verificando...";
     setTimeout(finalizarCompra, 1000);
