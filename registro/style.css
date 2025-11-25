@@ -1,0 +1,77 @@
+/* --- Reset Básico e Configuração Global --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #111;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+/* --- Estilos do Card e Inputs (Igual ao Login) --- */
+.catalog-link {
+    position: absolute; top: 1.5rem; right: 2rem;
+    font-size: 0.875rem; color: #9ca3af; text-decoration: none;
+    transition: color 0.2s ease;
+}
+.catalog-link:hover { color: #ffffff; }
+
+.login-container { width: 100%; max-width: 400px; }
+
+.login-card {
+    background-color: #18181b; /* zinc-900 */
+    border: 1px solid #27272a; /* zinc-800 */
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container { display: flex; justify-content: center; margin-bottom: 1rem; }
+.logo-svg { width: 3rem; height: 3rem; color: #a1a1aa; }
+
+.login-card h1 { font-size: 1.5rem; font-weight: 700; text-align: center; color: #ffffff; }
+.subtitle { font-size: 0.875rem; color: #a1a1aa; text-align: center; margin-top: 0.25rem; margin-bottom: 1.5rem; }
+
+.login-form { display: flex; flex-direction: column; gap: 1rem; }
+.form-group { position: relative; }
+
+.form-input {
+    width: 100%; padding: 0.75rem 1rem 0.75rem 2.75rem;
+    background-color: #27272a;
+    border: 1px solid #3f3f46;
+    color: #ffffff; border-radius: 0.5rem; font-size: 1rem;
+    transition: border-color 0.2s;
+}
+.form-input:focus { outline: none; border-color: #3b82f6; }
+
+/* Correção para Autofill do Chrome não ficar branco */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #27272a inset !important;
+    -webkit-text-fill-color: white !important;
+}
+
+.icon-wrapper {
+    position: absolute; top: 50%; transform: translateY(-50%); left: 0.75rem;
+    display: flex; align-items: center; pointer-events: none;
+}
+.icon { width: 1.25rem; height: 1.25rem; color: #71717a; }
+
+.btn {
+    width: 100%; padding: 0.75rem 1rem; font-size: 0.875rem; font-weight: 600;
+    border: none; border-radius: 0.5rem; cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+.btn-primary { background-color: #2563eb; color: #ffffff; }
+.btn-primary:hover { background-color: #1d4ed8; }
+
+.signup-link { text-align: center; font-size: 0.875rem; color: #a1a1aa; margin-top: 1.5rem; }
+.signup-link a { color: #3b82f6; text-decoration: none; font-weight: 500; }
+.signup-link a:hover { text-decoration: underline; }

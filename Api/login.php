@@ -1,19 +1,20 @@
 <?php
-// Inclui autoload do Composer (para JWT) e as classes
-require_once 'vendor/autoload.php';
+// Api/login.php SIMPLIFICADO
+
 require_once 'classes/Conexao.php';
 require_once 'classes/UsuarioDAO.php';
 
-use Firebase\JWT\JWT;
-
-// Configura cabeçalhos para API JSON e CORS
+// Permite acesso de qualquer origem (Corrige erro de CORS)
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Chave secreta (do .env original)
-$JWT_SECRET = 'sixfinalboss123';
+// Se for apenas uma verificação do navegador (OPTIONS), para aqui
+if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+    http_response_code(200);
+    exit;
+}
 
 $data = json_decode(file_get_contents("php://input"));
 
@@ -24,44 +25,35 @@ if (empty($data->email) || empty($data->password)) {
 }
 
 try {
-    // 1. Conectar ao banco
     $pdo = (new Conexao())->conectar();
-    
-    // 2. Usar o DAO para buscar o usuário
     $usuarioDAO = new UsuarioDAO($pdo);
     $user = $usuarioDAO->buscarPorEmail($data->email);
 
-    // 3. Validar a senha (igual ao server.js e aos exemplos PHP anteriores)
-if (!$user) {
-        http_response_code(401); // Não autorizado
-        echo json_encode(["message" => "Email ou senha inválidos."]);
+    if (!$user) {
+        http_response_code(401);
+        echo json_encode(["message" => "Email incorreto."]);
         exit;
     }
 
-    // Etapa 2: Se o usuário existe, a senha está correta?
-if (!password_verify($data->password, $user['password'])) {
-        http_response_code(401); // Não autorizado
-        echo json_encode(["message" => "Email ou senha inválidos."]);
+    // Verifica a senha (compatível com o registro que criamos)
+    if (!password_verify($data->password, $user['password'])) {
+        http_response_code(401);
+        echo json_encode(["message" => "Senha incorreta."]);
         exit;
     }
 
-    // 4. Gerar o Token (JWT)
-    $payload = [
-        'iat' => time(),
-        'exp' => time() + (60 * 60), // 1 hora
-        'id' => $user['id'],
-        'email' => $user['email']
-    ];
-    $token = JWT::encode($payload, $JWT_SECRET, 'HS256');
-
+    // Login Sucesso! (Sem JWT por enquanto para evitar erros de biblioteca)
+    // Retornamos um token falso simples ou o ID do usuário
     http_response_code(200);
     echo json_encode([
-        "message" => "Login bem-sucedido!",
-        "token" => $token
+        "message" => "Login realizado com sucesso!",
+        "user_id" => $user['id'],
+        "user_name" => $user['displayName'],
+        "token" => "token_simples_para_teste_" . time() 
     ]);
 
 } catch (Exception $e) {
     http_response_code(500);
-    echo json_encode(["message" => "Erro interno do servidor.", "error" => $e->getMessage()]);
+    echo json_encode(["message" => "Erro interno no servidor.", "error" => $e->getMessage()]);
 }
 ?>

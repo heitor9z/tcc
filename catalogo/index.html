@@ -1,44 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lowkey Drip</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - Lowkey Drip</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>LOwkey Drip</h1>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#" class="active">Catalog</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-    </nav>
-  </header>
 
-  <main>
-    <!-- Barra de busca -->
-    <div class="search-bar">
-      <input type="text" id="searchInput" placeholder="🔍 Search products...">
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                LOwkey <span class="text-blue">Drip</span>
+            </div>
+            
+            <nav>
+                <a href="../login/index.html">Home</a>
+                <a href="#" class="active">Catalog</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="icon-btn" onclick="window.location.href='../carrinho/index.html'">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+    </svg>
+</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="controls-area">
+            
+            <div class="search-wrapper">
+                <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+                <input type="text" id="searchInput" placeholder="Search products...">
+            </div>
+
+           <div class="filters">
+    <div class="filter-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+        </svg>
     </div>
+    <button class="filter-btn active" data-category="all">All</button>
+    <button class="filter-btn" data-category="clothing">Clothing</button>
+    <button class="filter-btn" data-category="sneakers">Sneakers</button>
+    <button class="filter-btn" data-category="accessories">Accessories</button>
+    
+    <button class="filter-btn" data-category="favorites" style="display:flex; align-items:center; gap:5px;">
+        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+        </svg>
+        Favorites
+    </button>
+</div>
+        </div>
 
-    <!-- Filtros -->
-    <div class="filters">
-      <button class="filter-btn active" data-category="all">All</button>
-      <button class="filter-btn" data-category="clothing">Clothing</button>
-      <button class="filter-btn" data-category="sneakers">Sneakers</button>
-      <button class="filter-btn" data-category="accessories">Accessories</button>
-    </div>
+        <div class="products-count">
+            Showing <span id="count-value">0</span> products
+        </div>
 
-    <!-- Grade de produtos -->
-    <div class="products" id="productList"></div>
-  </main>
+        <div id="productList" class="products-grid">
+            </div>
+    </main>
 
-  <footer>
-    Desenvolvido por Heitor © 2025
-  </footer>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

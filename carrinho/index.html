@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Carrinho - Lowkey Drip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="../catalogo/index.html" class="back-link">← Voltar ao Catálogo</a>
+        <h1>Meu Carrinho</h1>
+        <div style="width: 100px;"></div> </header>
+
+    <main class="cart-container">
+        <div class="cart-items" id="cartItemsContainer">
+            <p class="empty-msg">Seu carrinho está vazio.</p>
+        </div>
+
+        <div class="cart-summary">
+            <h2>Resumo do Pedido</h2>
+            
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span id="subtotal">R$ 0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Frete</span>
+                <span id="frete">R$ 0.00</span>
+            </div>
+            
+            <div class="divider"></div>
+            
+            <div class="summary-row total">
+                <span>Total</span>
+                <span id="total" class="text-blue">R$ 0.00</span>
+            </div>
+
+            <button class="btn-checkout">Finalizar Compra</button>
+            <button class="btn-continue" onclick="window.location.href='../catalogo/index.html'">Continuar Comprando</button>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
