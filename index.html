@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lowkey Drip - Streetwear Store</title>
+    <title>Lowkey Drip - Premium Resell</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -15,14 +15,13 @@
             <div class="logo">LOWKEY <span class="text-blue">DRIP</span></div>
             
             <div class="nav-links">
-                <a href="catalogo/index.html" class="nav-item">Catálogo</a>
-                
-                <div id="guest-area" class="auth-buttons">
+                <a href="catalogo/index.html" class="nav-item">Comprar</a> <a href="#" class="nav-item">Vender</a> <div id="guest-area" class="auth-buttons">
                     <a href="login/index.html" class="nav-link">Entrar</a>
                     <a href="registro/index.html" class="nav-btn">Registrar</a>
                 </div>
 
                 <div id="user-area" class="auth-buttons hidden">
+                    <a href="admin/index.html" id="btn-admin" class="nav-link hidden" style="color: #ef4444;">Admin 🔒</a>
                     <a href="meus_pedidos/index.html" class="nav-btn">Meus Pedidos</a>
                     <a href="#" id="btn-logout" class="nav-link" style="font-size: 0.9rem;">Sair</a>
                 </div>
@@ -33,12 +32,14 @@
     <header class="hero">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
-            <span class="hero-tag">Nova Coleção 2025</span>
-            <h1>Vista o <span class="text-outline">Hype</span>.<br>Viva o Estilo.</h1>
-            <p>A melhor curadoria de streetwear para quem não segue tendências, mas as cria.</p>
+            <span class="hero-tag">Autenticidade Garantida</span>
+            
+            <h1>O Hype <span class="text-outline">Raro</span><br>que você procura.</h1>
+            
+            <p>Sua fonte confiável para Sneakers e Streetwear exclusivos. Conectamos você às peças mais desejadas do mercado mundial.</p>
             
             <div class="hero-buttons">
-                <a href="catalogo/index.html" class="btn-hero primary">Ver Coleção</a>
+                <a href="catalogo/index.html" class="btn-hero primary">Ver Drops</a>
                 <a href="registro/index.html" id="hero-register-btn" class="btn-hero outline">Criar Conta</a>
             </div>
         </div>
@@ -47,12 +48,19 @@
     <section class="trending-section">
         <div class="container">
             <div class="section-header">
-                <h2>Trending Now 🔥</h2>
-                <a href="catalogo/index.html" class="view-all">Ver tudo →</a>
+                <h2>Novos Drops 🚀</h2>
+                <a href="catalogo/index.html" class="view-all">Ver Estoque →</a>
             </div>
             <div id="featured-grid" class="featured-grid">
-                <div class="loading">Carregando destaques...</div>
+                <div class="loading">Buscando raridades...</div>
             </div>
+        </div>
+    </section>
+
+    <section class="promo-banner">
+        <div class="container promo-content">
+            <h2>100% Original</h2>
+            <p>Todos os itens passam por uma verificação rigorosa de autenticidade antes do envio.</p>
         </div>
     </section>
 
@@ -60,22 +68,22 @@
         <div class="container footer-content">
             <div class="footer-col">
                 <h3>LOWKEY DRIP</h3>
-                <p>Streetwear premium para o dia a dia.</p>
+                <p>O maior acervo de streetwear e sneakers limitados do Brasil.</p>
             </div>
             <div class="footer-col">
-                <h4>Links Úteis</h4>
-                <a href="catalogo/index.html">Catálogo</a>
-                <a href="login/index.html">Login</a>
-                <a href="registro/index.html">Criar Conta</a>
+                <h4>Explorar</h4>
+                <a href="catalogo/index.html">Sneakers</a>
+                <a href="catalogo/index.html">Apparel</a>
+                <a href="catalogo/index.html">Acessórios</a>
             </div>
             <div class="footer-col">
-                <h4>Ajuda</h4>
-                <a href="rastreamento/index.html">Rastrear Pedido</a>
-                <a href="#">Suporte</a>
+                <h4>Suporte</h4>
+                <a href="rastreamento/index.html">Rastrear Envio</a>
+                <a href="#">Política de Autenticidade</a>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Lowkey Drip.</p>
+            <p>&copy; 2025 Lowkey Drip Resell.</p>
         </div>
     </footer>
 

@@ -5,24 +5,49 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarDestaques();
 });
 
-// 1. Verifica Login para ajustar o menu
 function verificarUsuario() {
     const email = localStorage.getItem("user_email");
-    const btnLogin = document.getElementById("btn-login");
-    const btnProfile = document.getElementById("btn-profile");
+    
+    const guestArea = document.getElementById("guest-area");
+    const userArea = document.getElementById("user-area");
+    const btnLogout = document.getElementById("btn-logout");
+    const btnAdmin = document.getElementById("btn-admin");
+    const heroRegisterBtn = document.getElementById("hero-register-btn");
 
     if (email) {
-        // Logado
-        if(btnLogin) btnLogin.classList.add("hidden");
-        if(btnProfile) btnProfile.classList.remove("hidden");
+        // LOGADO
+        if(guestArea) guestArea.classList.add("hidden");
+        if(userArea) userArea.classList.remove("hidden");
+        
+        // VERIFICAÇÃO DE ADMIN
+        // Troque pelo seu email exato que está no banco como admin
+        if (email === "sanielvanila@gmail.com") {
+            if(btnAdmin) btnAdmin.classList.remove("hidden");
+        }
+
+        // Atualiza botão do banner
+        if(heroRegisterBtn) {
+            heroRegisterBtn.innerText = "Meus Pedidos";
+            heroRegisterBtn.href = "meus_pedidos/index.html";
+        }
+
     } else {
-        // Não Logado
-        if(btnLogin) btnLogin.classList.remove("hidden");
-        if(btnProfile) btnProfile.classList.add("hidden");
+        // NÃO LOGADO
+        if(guestArea) guestArea.classList.remove("hidden");
+        if(userArea) userArea.classList.add("hidden");
+    }
+
+    // Logout
+    if(btnLogout) {
+        btnLogout.addEventListener("click", (e) => {
+            e.preventDefault();
+            localStorage.removeItem("user_email");
+            localStorage.removeItem("user_name");
+            window.location.reload();
+        });
     }
 }
 
-// 2. Carrega 3 Produtos para a seção "Trending"
 async function carregarDestaques() {
     const grid = document.getElementById("featured-grid");
     
@@ -35,16 +60,14 @@ async function carregarDestaques() {
             return;
         }
 
-        // Pega os 3 primeiros (ou aleatórios se preferir)
-        // Vamos pegar os 3 últimos adicionados (novidades)
+        // Pega os 3 últimos produtos (novidades)
         const destaques = produtos.slice(0, 3);
 
-        grid.innerHTML = ""; // Limpa loading
+        grid.innerHTML = ""; 
 
         destaques.forEach(p => {
             const card = document.createElement("div");
             card.classList.add("feat-card");
-            // Ao clicar, vai para os detalhes
             card.onclick = () => window.location.href = `catalogo/detalhes.html?id=${p.id}`;
 
             card.innerHTML = `
