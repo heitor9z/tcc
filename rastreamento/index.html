@@ -10,107 +10,81 @@
 <body>
 
     <header>
-        <a href="../catalogo/index.html" class="back-link">
+        <a href="../meus_pedidos/index.html" class="back-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
-            Voltar à Loja
+            Voltar aos Pedidos
         </a>
         <h1>Rastreamento</h1>
-        <div style="width: 100px;"></div> </header>
+        <div style="width: 120px;"></div>
+    </header>
 
     <main class="tracking-container">
         
         <div class="status-card">
             <div class="card-header">
                 <div>
-                    <h2 id="order-id">Pedido #LOD...</h2>
-                    <p class="eta-text">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Previsão: <span class="highlight">15-20 minutos</span>
-                    </p>
+                    <h2 id="order-id">Carregando...</h2>
+                    <p class="eta-text">Status Atual: <span class="highlight" id="text-status">...</span></p>
                 </div>
-                <div class="status-badge pulse">
-                    A Caminho
+                <div class="status-badge" id="badge-status">
+                    ...
                 </div>
             </div>
         </div>
 
-        <div class="tracking-grid">
+        <div class="timeline-card">
+            <h3>Progresso do Pedido</h3>
             
-            <div class="timeline-card">
-                <h3>Status da Entrega</h3>
-                
-                <div class="timeline">
-                    <div class="step completed">
-                        <div class="step-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                        </div>
-                        <div class="step-content">
-                            <h4>Pedido Confirmado</h4>
-                            <p>Pagamento aprovado via PIX.</p>
-                        </div>
+            <div class="timeline">
+                <div class="step" id="step-Pago">
+                    <div class="step-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
                     </div>
-
-                    <div class="step completed">
-                        <div class="step-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                            </svg>
-                        </div>
-                        <div class="step-content">
-                            <h4>Preparando Pedido</h4>
-                            <p>Seus itens já foram separados.</p>
-                        </div>
+                    <div class="step-content">
+                        <h4>Pedido Confirmado</h4>
+                        <p>Pagamento aprovado.</p>
                     </div>
+                </div>
 
-                    <div class="step active">
-                        <div class="step-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <div class="step-content">
-                            <h4>A Caminho</h4>
-                            <p>O entregador está indo até você.</p>
-                        </div>
+                <div class="step" id="step-Preparando">
+                    <div class="step-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" /></svg>
                     </div>
+                    <div class="step-content">
+                        <h4>Preparando</h4>
+                        <p>Separando no estoque.</p>
+                    </div>
+                </div>
 
-                    <div class="step">
-                        <div class="step-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                            </svg>
-                        </div>
-                        <div class="step-content">
-                            <h4>Entregue</h4>
-                            <p>Previsão de chegada em breve.</p>
-                        </div>
+                <div class="step" id="step-Caminho">
+                    <div class="step-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    </div>
+                    <div class="step-content">
+                        <h4>A Caminho</h4>
+                        <p>Saiu para entrega.</p>
+                    </div>
+                </div>
+
+                <div class="step" id="step-Entregue">
+                    <div class="step-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    </div>
+                    <div class="step-content">
+                        <h4>Entregue</h4>
+                        <p>Pedido recebido.</p>
                     </div>
                 </div>
             </div>
-
-            <div class="map-card">
-                <h3>Localização em Tempo Real</h3>
-                <div class="map-container">
-                    <div class="map-bg"></div>
-                    
-                    <div class="map-marker-wrapper">
-                        <div class="pulse-ring"></div>
-                        <div class="map-marker">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
+        <div class="actions-footer">
+            <button class="btn-outline" onclick="window.location.href='../catalogo/index.html'">Continuar Comprando</button>
+            <button class="btn-primary" onclick="window.location.href='../meus_pedidos/index.html'">Ver Todos Pedidos</button>
+        </div>
+
     </main>
 
     <script src="script.js"></script>

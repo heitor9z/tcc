@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!email || !password) {
             showToast("Por favor, preencha o email e a senha.", true);
             return;
+            
         }
 
         // <-- ISSO MUDOU (Início) -->
@@ -81,6 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
 
             if (response.ok) { // Status 200-299
+
+                localStorage.setItem("user_email", email); // Salva o email para usar em "Meus Pedidos"
+                localStorage.setItem("user_name", data.user_name); // Opcional
                 // Sucesso! O backend confirmou o login
                 showToast("Login realizado com sucesso! Redirecionando...");
                 

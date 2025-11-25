@@ -1,0 +1,88 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0e0e0e; color: #eaeaea;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: #111; border-bottom: 1px solid #27272a;
+    padding: 20px 0;
+}
+.header-content {
+    max-width: 900px; margin: 0 auto; padding: 0 20px;
+    display: flex; justify-content: space-between; align-items: center;
+}
+.back-link {
+    display: flex; align-items: center; gap: 8px;
+    color: #888; text-decoration: none; transition: 0.2s;
+}
+.back-link:hover { color: #fff; }
+h1 { font-size: 1.4rem; font-weight: 600; }
+
+/* Container */
+.container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+
+.profile-header { margin-bottom: 40px; }
+.profile-header h2 { font-size: 1.8rem; color: #fff; margin-bottom: 5px; }
+.profile-header p { color: #888; }
+
+/* Lista de Pedidos */
+.orders-list { display: flex; flex-direction: column; gap: 25px; }
+
+.loading { text-align: center; color: #666; margin-top: 50px; }
+.empty-state { text-align: center; color: #666; padding: 40px; background: #161616; border-radius: 12px; border: 1px solid #222; }
+
+/* Card do Pedido */
+.order-card {
+    background-color: #161616; border: 1px solid #222;
+    border-radius: 12px; overflow: hidden;
+    transition: transform 0.2s;
+}
+.order-card:hover { border-color: #3f3f46; }
+
+/* Cabeçalho do Pedido */
+.order-header {
+    background-color: #1a1a1a; padding: 15px 20px;
+    border-bottom: 1px solid #222;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px;
+}
+.order-id { font-weight: 700; color: #fff; }
+.order-date { font-size: 0.85rem; color: #888; margin-left: 10px; }
+.order-status {
+    background-color: #10b981; color: #fff;
+    padding: 4px 10px; border-radius: 20px;
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+}
+
+/* Corpo do Pedido */
+.order-body { padding: 20px; display: grid; grid-template-columns: 1fr auto; gap: 20px; }
+
+.order-items { display: flex; flex-direction: column; gap: 10px; }
+.item-row { display: flex; align-items: center; gap: 15px; }
+.item-img { width: 50px; height: 50px; background: #333; border-radius: 6px; object-fit: cover; }
+.item-info h4 { font-size: 0.95rem; color: #e4e4e7; margin-bottom: 2px; }
+.item-info p { font-size: 0.8rem; color: #888; }
+
+/* Info Direita (Total + Botão) */
+.order-actions {
+    text-align: right; display: flex; flex-direction: column;
+    justify-content: center; align-items: flex-end; gap: 10px;
+}
+.total-label { font-size: 0.85rem; color: #888; }
+.total-value { font-size: 1.2rem; font-weight: 700; color: #3b82f6; }
+
+.btn-track {
+    background-color: #27272a; border: 1px solid #3f3f46;
+    color: #fff; padding: 8px 16px; border-radius: 6px;
+    font-size: 0.85rem; cursor: pointer; text-decoration: none;
+    display: inline-block; transition: 0.2s;
+}
+.btn-track:hover { background-color: #3b82f6; border-color: #3b82f6; }
+
+@media (max-width: 600px) {
+    .order-body { grid-template-columns: 1fr; }
+    .order-actions { text-align: left; align-items: flex-start; margin-top: 15px; border-top: 1px solid #222; padding-top: 15px; }
+}

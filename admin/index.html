@@ -8,52 +8,93 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="admin-layout">
         <aside class="sidebar">
-            <div class="logo">LOWKEY <span class="text-blue">DRIP</span></div>
+            <div class="logo-area">
+                <div class="logo">LOWKEY <span class="text-blue">DRIP</span></div>
+                <div class="badge-admin">ADMIN</div>
+            </div>
+            
             <nav class="menu">
-                <button class="menu-btn active" onclick="showTab('pedidos')">📦 Pedidos / Vendas</button>
-                <button class="menu-btn" onclick="showTab('produtos')">👕 Gerenciar Estoque</button>
-                <button class="menu-btn" onclick="showTab('novo')">➕ Adicionar Produto</button>
+                <button class="menu-btn active" onclick="showTab('pedidos', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                    Pedidos
+                </button>
+                
+                <button class="menu-btn" onclick="showTab('produtos', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    Estoque
+                </button>
+                
+                <button class="menu-btn" onclick="showTab('novo', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                    </svg>
+                    Novo Produto
+                </button>
             </nav>
+
             <div class="logout-area">
-                <a href="../catalogo/index.html" class="logout-btn">Voltar à Loja</a>
+                <a href="../catalogo/index.html" class="logout-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    Sair / Loja
+                </a>
             </div>
         </aside>
 
         <main class="content">
+            
             <section id="tab-pedidos" class="tab-content active">
-                <h1>Vendas Realizadas</h1>
-                <p class="subtitle">Acompanhe o fluxo de caixa e entregas.</p>
-                <div id="orders-list" class="orders-grid"><p>Carregando...</p></div>
+                <header class="page-header">
+                    <h1>Vendas Realizadas</h1>
+                    <p class="subtitle">Gerencie os pedidos e status de envio.</p>
+                </header>
+                <div id="orders-list" class="orders-grid">
+                    <div class="loading-state">Carregando dados...</div>
+                </div>
             </section>
 
             <section id="tab-produtos" class="tab-content hidden">
-                <h1>Catálogo & Estoque</h1>
-                <p class="subtitle">Edite disponibilidade, preços e remova itens.</p>
+                <header class="page-header">
+                    <h1>Gerenciar Estoque</h1>
+                    <p class="subtitle">Edite preços, cores e tamanhos do catálogo.</p>
+                </header>
+
                 <div class="products-table-wrapper">
                     <table class="products-table">
                         <thead>
                             <tr>
-                                <th>Ref</th>
+                                <th width="60">Img</th>
                                 <th>Produto</th>
                                 <th>Preço</th>
-                                <th>Cores/Tam</th>
-                                <th>Ações</th>
+                                <th>Detalhes (Cores/Tam)</th>
+                                <th width="140">Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="products-list-body"></tbody>
+                        <tbody id="products-list-body">
+                            </tbody>
                     </table>
                 </div>
             </section>
 
             <section id="tab-novo" class="tab-content hidden">
-                <h1>Adicionar Novo Produto</h1>
+                <header class="page-header">
+                    <h1>Cadastrar Produto</h1>
+                    <p class="subtitle">Adicione novos itens ao catálogo.</p>
+                </header>
+
                 <div class="form-card">
                     <form id="product-form">
                         <div class="form-row">
-                            <div class="form-group"><label>Nome</label><input type="text" id="nome" required></div>
-                            <div class="form-group"><label>Preço</label><input type="number" id="preco" step="0.01" required></div>
+                            <div class="form-group"><label>Nome do Produto</label><input type="text" id="nome" required></div>
+                            <div class="form-group"><label>Preço (R$)</label><input type="number" id="preco" step="0.01" required></div>
                         </div>
                         <div class="form-row">
                             <div class="form-group"><label>Categoria</label>
@@ -63,31 +104,29 @@
                                     <option value="accessories">Acessórios</option>
                                 </select>
                             </div>
-                            <div class="form-group"><label>URL Imagem</label><input type="text" id="imagem" required></div>
+                            <div class="form-group"><label>URL da Imagem</label><input type="text" id="imagem" required></div>
                         </div>
-                        <div class="form-group">
-                            <label>Cores Disponíveis</label>
+                        <div class="form-group"><label>Cores Disponíveis</label>
                             <div class="checkbox-group">
-                                <label><input type="checkbox" name="cor" value="#000000"> Preto</label>
-                                <label><input type="checkbox" name="cor" value="#ffffff"> Branco</label>
-                                <label><input type="checkbox" name="cor" value="#ff0000"> Vermelho</label>
-                                <label><input type="checkbox" name="cor" value="#3b82f6"> Azul</label>
-                                <label><input type="checkbox" name="cor" value="#eab308"> Amarelo</label>
+                                <label class="chk-btn"><input type="checkbox" name="cor" value="#000000"> <span>Preto</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="cor" value="#ffffff"> <span>Branco</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="cor" value="#ff0000"> <span>Vermelho</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="cor" value="#3b82f6"> <span>Azul</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="cor" value="#eab308"> <span>Amarelo</span></label>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Tamanhos Disponíveis</label>
+                        <div class="form-group"><label>Tamanhos</label>
                             <div class="checkbox-group">
-                                <label><input type="checkbox" name="tamanho" value="S"> S</label>
-                                <label><input type="checkbox" name="tamanho" value="M"> M</label>
-                                <label><input type="checkbox" name="tamanho" value="L"> L</label>
-                                <label><input type="checkbox" name="tamanho" value="XL"> XL</label>
-                                <label><input type="checkbox" name="tamanho" value="40"> 40</label>
-                                <label><input type="checkbox" name="tamanho" value="42"> 42</label>
-                                <label><input type="checkbox" name="tamanho" value="44"> 44</label>
+                                <label class="chk-btn"><input type="checkbox" name="tamanho" value="S"> <span>S</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="tamanho" value="M"> <span>M</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="tamanho" value="L"> <span>L</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="tamanho" value="XL"> <span>XL</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="tamanho" value="40"> <span>40</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="tamanho" value="42"> <span>42</span></label>
+                                <label class="chk-btn"><input type="checkbox" name="tamanho" value="44"> <span>44</span></label>
                             </div>
                         </div>
-                        <button type="submit" class="btn-submit">Cadastrar Produto</button>
+                        <button type="submit" class="btn-submit">Salvar Produto</button>
                     </form>
                 </div>
             </section>
@@ -100,7 +139,6 @@
             <h2>Editar Produto</h2>
             <form id="edit-form">
                 <input type="hidden" id="edit-id">
-                
                 <div class="form-group"><label>Nome</label><input type="text" id="edit-nome" required></div>
                 <div class="form-row">
                     <div class="form-group"><label>Preço</label><input type="number" id="edit-preco" step="0.01" required></div>
@@ -113,30 +151,24 @@
                     </div>
                 </div>
                 <div class="form-group"><label>URL Imagem</label><input type="text" id="edit-imagem" required></div>
-
-                <div class="form-group">
-                    <label>Estoque de Cores</label>
+                
+                <div class="form-group"><label>Estoque Cores</label>
                     <div class="checkbox-group">
-                        <label><input type="checkbox" name="edit-cor" value="#000000"> Preto</label>
-                        <label><input type="checkbox" name="edit-cor" value="#ffffff"> Branco</label>
-                        <label><input type="checkbox" name="edit-cor" value="#ff0000"> Vermelho</label>
-                        <label><input type="checkbox" name="edit-cor" value="#3b82f6"> Azul</label>
-                        <label><input type="checkbox" name="edit-cor" value="#eab308"> Amarelo</label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-cor" value="#000000"> <span>Preto</span></label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-cor" value="#ffffff"> <span>Branco</span></label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-cor" value="#ff0000"> <span>Vermelho</span></label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-cor" value="#3b82f6"> <span>Azul</span></label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label>Estoque de Tamanhos</label>
+                <div class="form-group"><label>Estoque Tamanhos</label>
                     <div class="checkbox-group">
-                        <label><input type="checkbox" name="edit-tamanho" value="S"> S</label>
-                        <label><input type="checkbox" name="edit-tamanho" value="M"> M</label>
-                        <label><input type="checkbox" name="edit-tamanho" value="L"> L</label>
-                        <label><input type="checkbox" name="edit-tamanho" value="XL"> XL</label>
-                        <label><input type="checkbox" name="edit-tamanho" value="40"> 40</label>
-                        <label><input type="checkbox" name="edit-tamanho" value="42"> 42</label>
-                        <label><input type="checkbox" name="edit-tamanho" value="44"> 44</label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-tamanho" value="S"> <span>S</span></label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-tamanho" value="M"> <span>M</span></label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-tamanho" value="L"> <span>L</span></label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-tamanho" value="40"> <span>40</span></label>
+                        <label class="chk-btn"><input type="checkbox" name="edit-tamanho" value="42"> <span>42</span></label>
                     </div>
                 </div>
-
                 <button type="submit" class="btn-submit">Salvar Alterações</button>
             </form>
         </div>

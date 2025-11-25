@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Pedidos - Lowkey Drip</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <a href="../catalogo/index.html" class="back-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Voltar à Loja
+            </a>
+            <h1>Meus Pedidos</h1>
+            <div style="width: 100px;"></div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="profile-header">
+            <h2 id="user-greeting">Olá, Cliente</h2>
+            <p>Aqui está o histórico de suas compras recentes.</p>
+        </div>
+
+        <div id="orders-list" class="orders-list">
+            <div class="loading">Carregando seus pedidos...</div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

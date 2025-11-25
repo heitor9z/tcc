@@ -1,5 +1,12 @@
 // checkout/script.js
 
+// --- TRAVA DE SEGURANÇA ---
+// Se não tiver email salvo, chuta pro login imediatamente
+if (!localStorage.getItem("user_email")) {
+    alert("Acesso negado. Faça login primeiro.");
+    window.location.href = "../login/index.html";
+}
+
 // --- Elementos do DOM ---
 const itemsContainer = document.getElementById("checkout-items");
 const subtotalEl = document.getElementById("summary-subtotal");
@@ -59,9 +66,20 @@ function renderCheckout() {
     carrinho.forEach(item => {
         const totalItem = item.preco * item.quantidade;
         subtotal += totalItem;
+        
+        const cor = item.corEscolhida || "-";
+        const tam = item.tamanhoEscolhido || "-";
+
         const div = document.createElement("div");
         div.classList.add("summary-item");
-        div.innerHTML = `<img src="${item.imagem}" class="s-img"><div class="s-info"><h4>${item.nome}</h4><p>Qtd: ${item.quantidade}</p></div><div class="s-price">R$ ${totalItem.toFixed(2)}</div>`;
+        div.innerHTML = `
+            <img src="${item.imagem}" class="s-img">
+            <div class="s-info">
+                <h4>${item.nome}</h4>
+                <p>Qtd: ${item.quantidade} <span style="font-size:0.7rem; opacity:0.7">(${cor}/${tam})</span></p>
+            </div>
+            <div class="s-price">R$ ${totalItem.toFixed(2)}</div>
+        `;
         itemsContainer.appendChild(div);
     });
 
@@ -104,7 +122,7 @@ function monitorarPix(idTransacao) {
     }, 3000);
 }
 
-// --- FINALIZAR COMPRA (Salvar no Banco) ---
+// --- FINALIZAR COMPRA ---
 async function finalizarCompra() {
     const nome = document.getElementById("nome").value + " " + document.getElementById("sobrenome").value;
     const email = document.getElementById("email").value;
@@ -146,7 +164,7 @@ btnFinish.addEventListener("click", (e) => {
     if(!valid) { alert("Preencha todos os campos."); return; }
 
     const ID_TRANSACAO = "LOD" + Math.floor(Math.random() * 100000);
-    const pix = new Pix("seu@email.com", "Lowkey Drip", "BRASILIA", ID_TRANSACAO, totalFinalParaPix);
+    const pix = new Pix("test@lowkeydrip.com", "Lowkey Drip", "BRASILIA", ID_TRANSACAO, totalFinalParaPix);
     const payload = pix.getPayload();
 
     qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(payload)}`;
