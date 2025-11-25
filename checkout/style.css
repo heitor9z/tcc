@@ -1,0 +1,151 @@
+/* --- Configuração Base --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0e0e0e; color: #eaeaea;
+    min-height: 100vh;
+}
+
+/* --- Header --- */
+header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 40px; background-color: #0e0e0e; border-bottom: 1px solid #222;
+}
+.logo { font-weight: 700; font-size: 1.2rem; color: #fff; }
+.text-blue { color: #3b82f6; }
+.secure-badge { display: flex; align-items: center; gap: 8px; color: #888; font-size: 0.9rem; }
+.secure-badge svg { width: 16px; height: 16px; }
+
+/* --- Layout Principal --- */
+.checkout-container {
+    max-width: 1200px; margin: 0 auto; padding: 40px 20px;
+    display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px;
+}
+h1 { font-size: 2rem; margin-bottom: 5px; }
+.subtitle { color: #888; margin-bottom: 40px; font-size: 0.95rem; }
+
+/* --- Formulários --- */
+.form-section {
+    background-color: #161616; border: 1px solid #222;
+    padding: 25px; border-radius: 12px; margin-bottom: 25px;
+}
+.section-header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+
+.step-badge {
+    background-color: #222; color: #3b82f6; width: 30px; height: 30px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; font-weight: 700; font-size: 0.9rem;
+}
+.step-badge.blue { background-color: #3b82f6; color: #fff; }
+.step-badge.green { background-color: #10b981; color: #fff; }
+.section-header h2 { font-size: 1.1rem; font-weight: 600; }
+
+.form-group { margin-bottom: 15px; width: 100%; }
+.form-group label { display: block; color: #ccc; font-size: 0.85rem; margin-bottom: 8px; font-weight: 500; }
+.form-group input {
+    width: 100%; background-color: #222; border: 1px solid #333;
+    padding: 12px; border-radius: 6px; color: #fff; outline: none; transition: 0.2s;
+}
+.form-group input:focus { border-color: #3b82f6; }
+
+.row { display: flex; gap: 20px; }
+
+/* --- Estilo PIX --- */
+.pix-selection {
+    border: 2px solid #10b981; /* Verde */
+    background-color: rgba(16, 185, 129, 0.05);
+    padding: 20px; border-radius: 8px; position: relative;
+}
+.pix-header { display: flex; align-items: center; gap: 15px; margin-bottom: 10px; }
+.radio-circle {
+    width: 20px; height: 20px; border-radius: 50%;
+    border: 5px solid #10b981; background: #fff;
+}
+.pix-logo { height: 24px; }
+.pix-desc { font-size: 0.9rem; color: #ccc; line-height: 1.4; margin-left: 35px; }
+.discount-badge {
+    position: absolute; top: -10px; right: 20px;
+    background-color: #10b981; color: #fff;
+    font-size: 0.75rem; font-weight: 700;
+    padding: 4px 10px; border-radius: 20px;
+}
+
+/* --- Resumo do Pedido --- */
+.order-summary {
+    background-color: #161616; border: 1px solid #222;
+    border-radius: 12px; padding: 30px;
+}
+.summary-items { margin-bottom: 20px; max-height: 300px; overflow-y: auto; }
+.summary-item { display: flex; gap: 15px; margin-bottom: 15px; }
+.s-img { width: 50px; height: 50px; background: #333; border-radius: 6px; object-fit: cover; }
+.s-info h4 { font-size: 0.9rem; color: #fff; margin-bottom: 3px; }
+.s-info p { font-size: 0.8rem; color: #888; }
+.s-price { margin-left: auto; font-size: 0.9rem; color: #3b82f6; font-weight: 600; }
+
+.divider { height: 1px; background-color: #333; margin: 20px 0; }
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 10px; color: #bbb; font-size: 0.9rem; }
+.text-green { color: #10b981; }
+.summary-total {
+    display: flex; justify-content: space-between; margin-top: 15px;
+    font-size: 1.2rem; font-weight: 700; color: #fff;
+}
+
+.btn-pay {
+    width: 100%; background-color: #10b981; color: #fff; border: none;
+    padding: 15px; border-radius: 8px; margin-top: 25px;
+    font-weight: 600; cursor: pointer; transition: background 0.2s;
+}
+.btn-pay:hover { background-color: #059669; }
+
+/* --- MODAL (Janela do QR Code) --- */
+.hidden { display: none !important; }
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.85); z-index: 1000;
+    display: flex; justify-content: center; align-items: center;
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background-color: #18181b; width: 90%; max-width: 450px;
+    padding: 30px; border-radius: 16px; border: 1px solid #333;
+    position: relative; text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+.close-modal {
+    position: absolute; top: 15px; right: 20px; background: none; border: none;
+    color: #888; font-size: 1.5rem; cursor: pointer;
+}
+.modal-header img { margin-bottom: 10px; }
+.modal-header h2 { font-size: 1.4rem; margin-bottom: 20px; }
+
+.qr-container {
+    background: #fff; padding: 15px; border-radius: 10px;
+    display: inline-block; margin-bottom: 20px;
+}
+.qr-img { width: 180px; height: 180px; }
+
+.pix-copy-area { text-align: left; margin-bottom: 20px; }
+.pix-copy-area label { font-size: 0.85rem; color: #aaa; margin-bottom: 5px; display: block; }
+.copy-input-group { display: flex; gap: 10px; }
+.copy-input-group input {
+    flex-grow: 1; background: #222; border: 1px solid #333; color: #888;
+    padding: 8px; border-radius: 6px; font-size: 0.8rem;
+}
+.copy-input-group button {
+    background: #333; color: #fff; border: 1px solid #444;
+    padding: 0 15px; border-radius: 6px; cursor: pointer;
+}
+.copy-input-group button:hover { background: #444; }
+
+.modal-timer { color: #888; font-size: 0.9rem; margin-bottom: 25px; }
+
+.btn-primary-modal {
+    width: 100%; background-color: #3b82f6; color: #fff; padding: 12px;
+    border: none; border-radius: 8px; font-weight: 600; cursor: pointer;
+}
+.btn-primary-modal:hover { background-color: #2563eb; }
+
+@media(max-width: 900px) {
+    .checkout-container { grid-template-columns: 1fr; }
+    .order-summary-wrapper { order: -1; margin-bottom: 30px; }
+}
