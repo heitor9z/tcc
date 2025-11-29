@@ -85,6 +85,9 @@ function renderizarDetalhes(p) {
         </div>
     `).join('');
 
+    // Carregar Avaliações Reais (NOVO)
+    carregarAvaliacoes(p.id);
+
     // Mostra conteúdo e esconde loading
     loading.classList.add("hidden");
     content.classList.remove("hidden");
@@ -152,4 +155,115 @@ function adicionarAoLocalStorage(produto) {
         // Redireciona para o Carrinho
         window.location.href = "../carrinho/index.html";
     }, 800);
+}
+
+// --- Lógica de Avaliações (NOVO) ---
+let notaUsuario = 0;
+
+// Função Visual das Estrelas (Input)
+window.setNota = function(n) {
+    notaUsuario = n;
+    const estrelas = document.querySelectorAll('.star-btn');
+    estrelas.forEach((s, index) => {
+        s.style.color = index < n ? '#fbbf24' : '#3f3f46';
+    });
+}
+
+// Carregar Dados da API e Renderizar na Tela
+async function carregarAvaliacoes(produtoId) {
+    try {
+        const res = await fetch(`${API_URL}/avaliacoes.php?produto_id=${produtoId}`);
+        const data = await res.json();
+        
+        // --- 1. Atualiza o Resumo no Topo (Pequeno) ---
+        const starsHtml = '★'.repeat(Math.round(data.media)) + '☆'.repeat(5 - Math.round(data.media));
+        document.querySelector('#rating-display .stars').innerText = starsHtml;
+        document.getElementById('rating-value-small').innerText = data.media;
+        document.getElementById('rating-count-small').innerText = `(${data.total} avaliações)`;
+
+        // --- 2. Atualiza o Painel Grande (Inferior) ---
+        document.getElementById('rating-value-big').innerText = data.media;
+        document.getElementById('rating-count-big').innerText = `${data.total} avaliações`;
+        
+        // Estrelas estáticas grandes
+        let starsBig = '';
+        for(let i=0; i<5; i++) starsBig += i < Math.round(data.media) ? '★' : '☆';
+        document.getElementById('stars-static').innerText = starsBig;
+
+        // --- 3. Renderiza a Lista de Comentários ---
+        const list = document.getElementById('comments-list');
+        list.innerHTML = "";
+
+        if (data.comentarios && data.comentarios.length > 0) {
+            data.comentarios.forEach(c => {
+                let cStars = '★'.repeat(c.nota) + '☆'.repeat(5 - c.nota);
+                
+                const div = document.createElement('div');
+                div.classList.add('comment-card');
+                div.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-user">${c.nome}</span>
+                        <span class="comment-date">${new Date(c.data_avaliacao).toLocaleDateString('pt-BR')}</span>
+                    </div>
+                    <span class="comment-stars">${cStars}</span>
+                    <p class="comment-text">${c.comentario || "<em>Sem comentário.</em>"}</p>
+                `;
+                list.appendChild(div);
+            });
+        } else {
+            list.innerHTML = "<p style='color:#666; text-align:center; padding:20px;'>Nenhuma avaliação ainda. Seja o primeiro!</p>";
+        }
+
+        // Mostra a seção que estava oculta
+        document.getElementById('reviews-area').classList.remove('hidden');
+
+    } catch (err) {
+        console.error("Erro ao carregar avaliações", err);
+    }
+}
+
+// Enviar Avaliação
+window.enviarAvaliacao = async function() {
+    const userId = localStorage.getItem("user_id");
+    if (!userId) {
+        alert("Você precisa fazer login para avaliar!");
+        window.location.href = "../login/index.html";
+        return;
+    }
+    if (notaUsuario === 0) {
+        alert("Por favor, selecione uma nota (estrelas).");
+        return;
+    }
+
+    const comentario = document.getElementById('review-comment').value;
+    const produtoId = new URLSearchParams(window.location.search).get("id");
+
+ try {
+        const res = await fetch(`${API_URL}/avaliacoes.php`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                produto_id: produtoId,
+                usuario_id: userId,
+                nota: notaUsuario,
+                comentario: comentario
+            })
+        });
+
+        // Tenta ler a mensagem JSON do servidor
+        const result = await res.json(); 
+
+        if (res.ok) {
+            alert(result.message || "Avaliação enviada!"); // Mensagem de sucesso
+            document.getElementById('review-comment').value = "";
+            setNota(0);
+            carregarAvaliacoes(produtoId);
+        } else {
+            // AQUI: Mostra o erro vindo do PHP ("Você precisa comprar...")
+            alert(result.message || "Erro ao processar."); 
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Erro de conexão.");
+    }
 }

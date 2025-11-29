@@ -38,8 +38,10 @@
                 <span class="category-tag" id="prod-category">Categoria</span>
                 <h1 id="prod-name">Nome do Produto</h1>
                 
-                <div class="rating">
-                    ★★★★★ <span class="reviews">(4.8/5 - 120 avaliações)</span>
+                <div class="rating" id="rating-display" style="cursor: pointer;" onclick="document.getElementById('reviews-area').scrollIntoView({behavior: 'smooth'})">
+                    <span class="stars" style="color:#fbbf24; font-size:1.1rem;">★★★★★</span> 
+                    <span id="rating-value-small" style="font-weight:600; color:#fff; margin-left:5px;">--</span> 
+                    <span id="rating-count-small" class="reviews" style="font-size:0.9rem; color:#888;">(Ver avaliações)</span>
                 </div>
 
                 <div class="price-area">
@@ -55,14 +57,12 @@
 
                 <div class="selector-group">
                     <label>Escolha a Cor:</label>
-                    <div class="color-options" id="color-container">
-                        </div>
+                    <div class="color-options" id="color-container"></div>
                 </div>
 
                 <div class="selector-group">
                     <label>Escolha o Tamanho:</label>
-                    <div class="size-options" id="size-container">
-                        </div>
+                    <div class="size-options" id="size-container"></div>
                 </div>
 
                 <div class="action-area">
@@ -72,6 +72,36 @@
                 </div>
             </div>
         </div>
+
+        <section class="reviews-section hidden" id="reviews-area">
+            <div class="reviews-header">
+                <h2>Avaliações dos Clientes</h2>
+                <div class="rating-summary">
+                    <span class="big-rating" id="rating-value-big">0.0</span>
+                    <div class="stars-wrapper">
+                        <span class="stars-static" id="stars-static">★★★★★</span>
+                        <span class="total-reviews" id="rating-count-big">0 avaliações</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="review-form-card">
+                <h3>Deixe sua opinião</h3>
+                <div class="star-input">
+                    <span onclick="setNota(1)" class="star-btn">★</span>
+                    <span onclick="setNota(2)" class="star-btn">★</span>
+                    <span onclick="setNota(3)" class="star-btn">★</span>
+                    <span onclick="setNota(4)" class="star-btn">★</span>
+                    <span onclick="setNota(5)" class="star-btn">★</span>
+                </div>
+                <textarea id="review-comment" placeholder="Conte o que achou do produto... (Opcional)"></textarea>
+                <button onclick="enviarAvaliacao()" class="btn-submit-review">Enviar Avaliação</button>
+            </div>
+
+            <div id="comments-list" class="comments-list">
+                </div>
+        </section>
+
     </main>
 
     <script src="detalhes.js"></script>
