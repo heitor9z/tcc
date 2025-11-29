@@ -22,7 +22,7 @@ function injetarComponentesGlobais() {
         const modalHTML = `
             <div id="global-confirm-modal" class="global-modal-overlay">
                 <div class="global-modal">
-                    <h2 style="margin-bottom:10px; font-size:1.4rem;">Confirmação</h2>
+                    <h2 style="margin-bottom:10px; font-size:1.4rem; color:#fff;">Confirmação</h2>
                     <p id="global-modal-text" style="color:#a1a1aa; margin-bottom:20px;">Tem certeza?</p>
                     <div class="modal-btns">
                         <button class="btn-modal-cancel" id="btn-global-cancel">Cancelar</button>
@@ -41,28 +41,40 @@ function carregarLayout() {
     const isInSubfolder = subfolders.some(folder => path.includes(folder));
     const p = isInSubfolder ? "../" : "./";
 
-    // --- HTML Header ---
+    // --- HTML Header (SEM BARRA DE BUSCA) ---
     const headerHTML = `
         <div class="header-container-global">
             <a href="${p}index.html" class="logo">LOWKEY <span class="text-blue">DRIP</span></a>
+            
             <nav class="desktop-nav">
                 <a href="${p}index.html" class="nav-link">Início</a>
                 <a href="${p}catalogo/index.html" class="nav-link">Catálogo</a>
                 <a href="${p}meus_pedidos/index.html" id="link-pedidos-nav" class="nav-link hidden">Meus Pedidos</a>
             </nav>
+
             <div class="header-actions">
-                <div class="search-bar-mini hidden-mobile">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                    <input type="text" placeholder="Buscar..." onkeypress="if(event.key === 'Enter') window.location.href='${p}catalogo/index.html'">
-                </div>
                 <a href="${p}carrinho/index.html" class="icon-btn" title="Meu Carrinho">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
                 </a>
+
                 <div id="auth-buttons-header">
                     <a href="${p}login/index.html" id="btn-login-header" class="btn-login-small">Entrar</a>
+                    
                     <div id="user-logged-area" class="hidden" style="display:flex; align-items:center; gap:10px;">
-                        <a href="${p}admin/index.html" id="link-admin-icon" class="icon-btn text-red hidden" title="Painel Admin"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg></a>
-                        <button id="btn-logout-header" class="icon-btn text-gray" title="Sair"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg></button>
+                        <a href="${p}admin/index.html" id="link-admin-icon" class="icon-btn text-red hidden" title="Painel Admin">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </a>
+                        
+                        <button id="btn-logout-header" class="icon-btn text-gray" title="Sair">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -76,20 +88,36 @@ function carregarLayout() {
                 <div class="logo" style="margin-bottom:15px;">LOWKEY <span class="text-blue">DRIP</span></div>
                 <p class="footer-desc">A sua fonte número 1 de streetwear autêntico e exclusivo no Brasil.</p>
                 <div class="social-icons">
-                    <a href="#" class="social-link">Instagram</a><a href="#" class="social-link">Twitter</a><a href="#" class="social-link">Discord</a>
+                    <a href="#" class="social-link">Instagram</a>
+                    <a href="#" class="social-link">Twitter</a>
+                    <a href="#" class="social-link">Discord</a>
                 </div>
             </div>
             <div class="footer-col">
-                <h4>Navegação</h4><a href="${p}index.html">Início</a><a href="${p}catalogo/index.html">Catálogo Completo</a><a href="${p}catalogo/index.html?filter=sneakers">Sneakers</a><a href="${p}catalogo/index.html?filter=clothing">Roupas</a>
+                <h4>Navegação</h4>
+                <a href="${p}index.html">Início</a>
+                <a href="${p}catalogo/index.html">Catálogo Completo</a>
+                <a href="${p}catalogo/index.html?filter=sneakers">Sneakers</a>
+                <a href="${p}catalogo/index.html?filter=clothing">Roupas</a>
             </div>
             <div class="footer-col">
-                <h4>Área do Cliente</h4><a href="${p}meus_pedidos/index.html">Meus Pedidos</a><a href="${p}rastreamento/index.html">Rastrear Encomenda</a><a href="#">Central de Ajuda</a><a href="#">Termos de Uso</a>
+                <h4>Área do Cliente</h4>
+                <a href="${p}meus_pedidos/index.html">Meus Pedidos</a>
+                <a href="${p}rastreamento/index.html">Rastrear Encomenda</a>
+                <a href="#">Central de Ajuda</a>
+                <a href="#">Termos de Uso</a>
             </div>
             <div class="footer-col">
-                <h4>Pagamento Seguro</h4><div class="payment-badges"><span>PIX</span><span>Crédito</span><span>Boleto</span></div><p style="font-size:0.8rem; color:#666; margin-top:15px;">Ambiente criptografado.</p>
+                <h4>Pagamento Seguro</h4>
+                <div class="payment-badges">
+                    <span>PIX</span><span>Crédito</span><span>Boleto</span>
+                </div>
+                <p style="font-size:0.8rem; color:#666; margin-top:15px;">Ambiente criptografado.</p>
             </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 Lowkey Drip Resell.</p></div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Lowkey Drip Resell.</p>
+        </div>
     `;
 
     const headerPlaceholder = document.getElementById("main-header");
@@ -128,14 +156,13 @@ window.showConfirmModal = function(msg, callback) {
     const btnCancel = document.getElementById('btn-global-cancel');
 
     if(!modalOverlay) {
-        if(confirm(msg)) callback(); // Fallback se o modal não existir
+        if(confirm(msg)) callback();
         return;
     }
 
     msgText.innerText = msg;
     modalOverlay.classList.add('open');
 
-    // Clone nodes para remover listeners antigos
     const newConfirm = btnConfirm.cloneNode(true);
     const newCancel = btnCancel.cloneNode(true);
     btnConfirm.parentNode.replaceChild(newConfirm, btnConfirm);
@@ -151,11 +178,11 @@ window.showConfirmModal = function(msg, callback) {
     });
 }
 
-// 3. Validação de Formulários (Borda vermelha em vez de popup)
+// 3. Validação de Formulários
 function ativarValidacaoGlobal() {
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
-        form.setAttribute('novalidate', true); // Desativa popup nativo
+        form.setAttribute('novalidate', true);
         form.addEventListener('submit', (e) => {
             if (!form.checkValidity()) {
                 e.preventDefault();

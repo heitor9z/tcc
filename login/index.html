@@ -10,40 +10,45 @@
 </head>
 <body>
 
-    <div id="main-header"></div>
+    <a href="../index.html" class="catalog-link">Voltar ao Início</a>
 
-    <div class="login-container" style="margin-top: 60px; margin-bottom: 60px;">
-        <div class="login-card">
-            <div class="logo-container">
-                <svg class="logo-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.52 4.675a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.52 4.675c.3.921-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.52-4.675a1 1 0 00-.363-1.118L.98 10.1c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.52-4.675z"></path></svg>
+    <main class="container" style="display:flex; justify-content:center; align-items:center; flex-grow:1; min-height:100vh;">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="logo-container">
+                    <svg class="logo-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.52 4.675a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.52 4.675c.3.921-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.52-4.675a1 1 0 00-.363-1.118L.98 10.1c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.52-4.675z"></path></svg>
+                </div>
+                <h1>Bem-vindo de volta</h1>
+                <p class="subtitle">Acesse sua conta</p>
+
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <span class="icon-wrapper"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path></svg></span>
+                        <input type="email" id="email" name="email" placeholder="Email" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <span class="icon-wrapper"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                        <input type="password" id="password" name="password" placeholder="Senha" class="form-input" required>
+                        <span id="toggle-password" class="icon-wrapper-right password-icon" style="cursor:pointer;">
+                            <svg id="icon-eye" class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                            <svg id="icon-eye-off" class="icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7 1.274 4.057 5.064 7 9.542 7 .847 0 1.67.11 2.468.315m5.446 2.443a9.035 9.035 0 01.38 1.242C20.268 9.057 16.477 12 12 12c-1.26 0-2.47-.21-3.597-.584M6.343 6.343A8.966 8.966 0 0112 5c1.47 0 2.87.34 4.11.95M12 15a3 3 0 110-6 3 3 0 010 6z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18"></path></svg>
+                        </span>
+                    </div>
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember">
+                            <span>Lembrar de mim</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </form>
+
+                <div class="divider"><hr><span>OU</span><hr></div>
+                <button id="google-login-btn" class="btn btn-secondary">Entrar com Google</button>
+                <p class="signup-link">Não tem conta? <a href="../registro/index.html">Cadastre-se</a></p>
             </div>
-            <h1>Bem-vindo de volta</h1>
-            <p class="subtitle">Acesse sua conta</p>
-
-            <form id="login-form" class="login-form">
-                <div class="form-group">
-                    <span class="icon-wrapper"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path></svg></span>
-                    <input type="email" id="email" name="email" placeholder="Email" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <span class="icon-wrapper"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
-                    <input type="password" id="password" name="password" placeholder="Senha" class="form-input" required>
-                    <span id="toggle-password" class="icon-wrapper-right password-icon">
-                        <svg id="icon-eye" class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                        <svg id="icon-eye-off" class="icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7 1.274 4.057 5.064 7 9.542 7 .847 0 1.67.11 2.468.315m5.446 2.443a9.035 9.035 0 01.38 1.242C20.268 9.057 16.477 12 12 12c-1.26 0-2.47-.21-3.597-.584M6.343 6.343A8.966 8.966 0 0112 5c1.47 0 2.87.34 4.11.95M12 15a3 3 0 110-6 3 3 0 010 6z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18"></path></svg>
-                    </span>
-                </div>
-                <button type="submit" class="btn btn-primary">Entrar</button>
-            </form>
-
-            <div class="divider"><hr><span>OU</span><hr></div>
-            <button id="google-login-btn" class="btn btn-secondary">Entrar com Google</button>
-            <p class="signup-link">Não tem conta? <a href="../registro/index.html">Cadastre-se</a></p>
         </div>
-    </div>
-
-    <div id="main-footer"></div>
-    <div id="toast" class="toast"><span id="toast-message"></span></div>
+    </main>
 
     <script src="../layout.js"></script>
     <script src="script.js"></script>
