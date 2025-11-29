@@ -1,3 +1,5 @@
+// rastreamento/script.js
+
 const API_URL = "http://localhost/tcc/api";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -5,8 +7,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const id = params.get("id");
 
     if (!id) {
-        alert("Pedido não encontrado.");
-        window.location.href = "../meus_pedidos/index.html";
+        // Usa a notificação global
+        if(window.showToast) showToast("Pedido não encontrado.", "error");
+        else alert("Pedido não encontrado.");
+        
+        // Espera um pouco para o usuário ler antes de redirecionar
+        setTimeout(() => {
+            window.location.href = "../meus_pedidos/index.html";
+        }, 2000);
         return;
     }
 
@@ -25,6 +33,7 @@ async function buscarStatusPedido(id) {
     } catch (err) {
         console.error(err);
         document.getElementById("order-id").innerText = "Erro ao carregar";
+        showToast("Erro ao buscar informações do pedido.", "error");
     }
 }
 
@@ -34,34 +43,24 @@ function atualizarTela(pedido) {
     document.getElementById("badge-status").innerText = pedido.status;
 
     // Lógica da Timeline
-    // Mapeia os status para níveis (1 a 4)
-    const niveis = {
-        "Pago": 1,
-        "Preparando": 2,
-        "A Caminho": 3,
-        "Entregue": 4
-    };
-
+    const niveis = { "Pago": 1, "Preparando": 2, "A Caminho": 3, "Entregue": 4 };
     const nivelAtual = niveis[pedido.status] || 1;
 
-    // Atualiza as classes CSS
     atualizarPasso("step-Pago", 1, nivelAtual);
     atualizarPasso("step-Preparando", 2, nivelAtual);
-    atualizarPasso("step-Caminho", 3, nivelAtual); // "A Caminho" no banco, ID simplificado no HTML
+    atualizarPasso("step-Caminho", 3, nivelAtual);
     atualizarPasso("step-Entregue", 4, nivelAtual);
 }
 
 function atualizarPasso(elementId, nivelPasso, nivelAtual) {
     const el = document.getElementById(elementId);
-    if(!el) return; // Proteção caso ID não bata
+    if(!el) return;
 
-    // Remove classes antigas
     el.classList.remove("completed", "active");
 
     if (nivelPasso < nivelAtual) {
-        el.classList.add("completed"); // Já passou
+        el.classList.add("completed"); 
     } else if (nivelPasso === nivelAtual) {
-        el.classList.add("active"); // Está aqui agora
+        el.classList.add("active"); 
     }
-    // Se for maior, fica sem classe (cinza/pendente)
 }

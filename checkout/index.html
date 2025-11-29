@@ -5,18 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Compra - Lowkey Drip</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <div class="logo">LOWKEY <span class="text-blue">DRIP</span></div>
-        <div class="secure-badge">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-            Checkout Seguro
-        </div>
-    </header>
+
+    <div id="main-header"></div>
 
     <main class="checkout-container">
         <div class="checkout-form">
@@ -33,14 +27,8 @@
                     <input type="email" id="email" placeholder="seu@email.com" required>
                 </div>
                 <div class="row">
-                    <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" id="nome" placeholder="João" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Sobrenome</label>
-                        <input type="text" id="sobrenome" placeholder="Silva" required>
-                    </div>
+                    <div class="form-group"><label>Nome</label><input type="text" id="nome" placeholder="João" required></div>
+                    <div class="form-group"><label>Sobrenome</label><input type="text" id="sobrenome" placeholder="Silva" required></div>
                 </div>
             </section>
 
@@ -49,23 +37,11 @@
                     <span class="step-badge blue">2</span>
                     <h2>Endereço de Entrega</h2>
                 </div>
-                <div class="form-group">
-                    <label>Endereço</label>
-                    <input type="text" id="endereco" placeholder="Rua, número, complemento" required>
-                </div>
+                <div class="form-group"><label>Endereço</label><input type="text" id="endereco" placeholder="Rua, número, complemento" required></div>
                 <div class="row">
-                    <div class="form-group">
-                        <label>Cidade</label>
-                        <input type="text" id="cidade" placeholder="São Paulo" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Estado</label>
-                        <input type="text" id="estado" placeholder="SP" required>
-                    </div>
-                    <div class="form-group">
-                        <label>CEP</label>
-                        <input type="text" id="cep" placeholder="00000-000" required>
-                    </div>
+                    <div class="form-group"><label>Cidade</label><input type="text" id="cidade" placeholder="São Paulo" required></div>
+                    <div class="form-group"><label>Estado</label><input type="text" id="estado" placeholder="SP" required></div>
+                    <div class="form-group"><label>CEP</label><input type="text" id="cep" placeholder="00000-000" required></div>
                 </div>
             </section>
 
@@ -74,53 +50,27 @@
                     <span class="step-badge green">3</span>
                     <h2>Pagamento</h2>
                 </div>
-                
                 <div class="pix-selection selected">
                     <div class="pix-header">
                         <div class="radio-circle"></div>
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg" alt="Logo Pix" class="pix-logo">
                         <span>Pagamento via PIX</span>
                     </div>
-                    <p class="pix-desc">
-                        Aprovação imediata. O QR Code será gerado na próxima tela.
-                    </p>
-                    <div class="discount-badge">
-                        5% OFF
-                    </div>
+                    <p class="pix-desc">Aprovação imediata. O QR Code será gerado na próxima tela.</p>
+                    <div class="discount-badge">5% OFF</div>
                 </div>
             </section>
-
         </div>
 
         <div class="order-summary-wrapper">
             <div class="order-summary">
                 <h3>Resumo do Pedido</h3>
-                
                 <div id="checkout-items" class="summary-items"></div>
-
                 <div class="divider"></div>
-
-                <div class="summary-row">
-                    <span>Subtotal</span>
-                    <span id="summary-subtotal">R$ 0.00</span>
-                </div>
-                <div class="summary-row">
-                    <span>Frete</span>
-                    <span id="summary-frete">R$ 12.99</span>
-                </div>
-                <div class="summary-row">
-                    <span>Desconto PIX (5%)</span>
-                    <span id="summary-discount" class="text-green">- R$ 0.00</span>
-                </div>
-
-                <div class="summary-total">
-                    <span>Total</span>
-                    <span id="summary-total" class="text-blue">R$ 0.00</span>
-                </div>
-
-                <button id="btn-finish" class="btn-pay">
-                    Gerar PIX e Finalizar
-                </button>
+                <div class="summary-row"><span>Subtotal</span><span id="summary-subtotal">R$ 0.00</span></div>
+                <div class="summary-row"><span>Frete</span><span id="summary-frete">R$ 12.99</span></div>
+                <div class="summary-row"><span>Desconto PIX</span><span id="summary-discount" class="text-green">- R$ 0.00</span></div>
+                <div class="summary-total"><span>Total</span><span id="summary-total" class="text-blue">R$ 0.00</span></div>
+                <button id="btn-finish" class="btn-pay">Gerar PIX e Finalizar</button>
             </div>
         </div>
     </main>
@@ -128,16 +78,10 @@
     <div id="pix-modal" class="modal-overlay hidden">
         <div class="modal-content">
             <button class="close-modal" id="close-modal">&times;</button>
-            
             <div class="modal-header">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Logo%E2%80%94pix_powered_by_Banco_Central_%28Brazil%2C_2020%29.svg" alt="Pix" width="60">
                 <h2>Escaneie para pagar</h2>
             </div>
-
-            <div class="qr-container">
-                <img src="" alt="Gerando QR Code..." class="qr-img">
-            </div>
-
+            <div class="qr-container"><img src="" alt="Gerando QR Code..." class="qr-img"></div>
             <div class="pix-copy-area">
                 <label>Pix Copia e Cola</label>
                 <div class="copy-input-group">
@@ -145,15 +89,14 @@
                     <button id="btn-copy">Copiar</button>
                 </div>
             </div>
-
             <p class="modal-timer">Tempo restante: <span id="timer">15:00</span></p>
-
-            <button id="btn-confirm-payment" class="btn-primary-modal">
-                Já realizei o pagamento
-            </button>
+            <button id="btn-confirm-payment" class="btn-primary-modal">Já realizei o pagamento</button>
         </div>
     </div>
 
+    <div id="main-footer"></div>
+
+    <script src="../layout.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

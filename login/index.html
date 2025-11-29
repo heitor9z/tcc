@@ -4,119 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Lowkey Drip</title>
-    
-    <!-- 1. Google Fonts (Inter) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- 2. Link para seu arquivo CSS -->
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
-    
-    <!-- 3. Link para seu arquivo JS (defer garante que o HTML carregue primeiro) -->
-    <script src="script.js" defer></script>
 </head>
 <body>
 
-    <!-- Link para o Catálogo (Topo Direito) -->
-    <a href="../catalogo/index.html" class="catalog-link">
-        Ver Catálogo
-    </a>
+    <div id="main-header"></div>
 
-    <!-- Card de Login Central -->
-    <div class="login-container">
+    <div class="login-container" style="margin-top: 60px; margin-bottom: 60px;">
         <div class="login-card">
-            
-            <!-- Logo (Placeholder) -->
             <div class="logo-container">
-                <svg class="logo-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.52 4.675a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.52 4.675c.3.921-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.52-4.675a1 1 0 00-.363-1.118L.98 10.1c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.52-4.675z"></path></svg>
+                <svg class="logo-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.52 4.675a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.52 4.675c.3.921-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.52-4.675a1 1 0 00-.363-1.118L.98 10.1c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.52-4.675z"></path></svg>
             </div>
+            <h1>Bem-vindo de volta</h1>
+            <p class="subtitle">Acesse sua conta</p>
 
-            <!-- Títulos -->
-            <h1>Lowkey Drip</h1>
-            <p class="subtitle">Enter the matrix</p>
-
-            <!-- Formulário -->
             <form id="login-form" class="login-form">
-                <!-- Campo de Email -->
                 <div class="form-group">
-                    <span class="icon-wrapper">
-                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path></svg>
-                    </span>
+                    <span class="icon-wrapper"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206"></path></svg></span>
                     <input type="email" id="email" name="email" placeholder="Email" class="form-input" required>
                 </div>
-
-                <!-- Campo de Senha -->
                 <div class="form-group">
-                    <span class="icon-wrapper">
-                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                    </span>
-                    <input type="password" id="password" name="password" placeholder="Password" class="form-input" required>
+                    <span class="icon-wrapper"><svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                    <input type="password" id="password" name="password" placeholder="Senha" class="form-input" required>
                     <span id="toggle-password" class="icon-wrapper-right password-icon">
-                        <!-- Ícone "olho aberto" -->
-                        <svg id="icon-eye" class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                        <!-- Ícone "olho fechado" (escondido por padrão) -->
-                        <svg id="icon-eye-off" class="icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7 1.274 4.057 5.064 7 9.542 7 .847 0 1.67.11 2.468.315m5.446 2.443a9.035 9.035 0 01.38 1.242C20.268 9.057 16.477 12 12 12c-1.26 0-2.47-.21-3.597-.584M6.343 6.343A8.966 8.966 0 0112 5c1.47 0 2.87.34 4.11.95M12 15a3 3 0 110-6 3 3 0 010 6z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18"></path></svg>
+                        <svg id="icon-eye" class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        <svg id="icon-eye-off" class="icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7 1.274 4.057 5.064 7 9.542 7 .847 0 1.67.11 2.468.315m5.446 2.443a9.035 9.035 0 01.38 1.242C20.268 9.057 16.477 12 12 12c-1.26 0-2.47-.21-3.597-.584M6.343 6.343A8.966 8.966 0 0112 5c1.47 0 2.87.34 4.11.95M12 15a3 3 0 110-6 3 3 0 010 6z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3l18 18"></path></svg>
                     </span>
                 </div>
-
-                <!-- Remember me -->
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" name="remember">
-                        <span>Remember me</span>
-                    </label>
-                    <!-- <a href="#" class="forgot-password">Forgot password?</a> -->
-                </div>
-
-                <!-- Botão Sign In -->
-                <button type="submit" class="btn btn-primary">
-                    Sign In
-                </button>
+                <button type="submit" class="btn btn-primary">Entrar</button>
             </form>
 
-            <!-- Divisor -->
-            <div class="divider">
-                <hr>
-                <span>OR CONTINUE WITH</span>
-                <hr>
-            </div>
-
-            <!-- Botão Google Login -->
-            <button id="google-login-btn" class="btn btn-secondary">
-                <svg class="google-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path><path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path><path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.223,0-9.641-3.317-11.28-7.94l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path><path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path></svg>
-                Continue with Google
-            </button>
-
-            <!-- Link para Registro -->
-            <p class="signup-link">
-                Don't have an account? 
-                <a href="../registro/index.html">
-                    Sign up, it's free!
-                </a>
-            </p>
-
+            <div class="divider"><hr><span>OU</span><hr></div>
+            <button id="google-login-btn" class="btn btn-secondary">Entrar com Google</button>
+            <p class="signup-link">Não tem conta? <a href="../registro/index.html">Cadastre-se</a></p>
         </div>
     </div>
 
-    <!-- Rodapé com Contagem de Usuários e Avatares -->
-    <footer class="footer-info">
-        <p>
-            Join over <span id="user-count" class="user-count-number">...</span> global Drip users
-        </p>
-        <div class="avatar-group">
-            <span class="avatar" style="background-color: #4f46e5;">JD</span>
-            <span class="avatar" style="background-color: #ec4899;">AS</span>
-            <span class="avatar" style="background-color: #8b5cf6;">MK</span>
-            <span class="avatar" style="background-color: #14b8a6;">RL</span>
-            <span class="avatar" style="background-color: #f97316;">CF</span>
-        </div>
-    </footer>
+    <div id="main-footer"></div>
+    <div id="toast" class="toast"><span id="toast-message"></span></div>
 
-    <!-- Notificação Toast (Escondida) -->
-    <div id="toast" class="toast">
-        <span id="toast-message"></span>
-    </div>
-
+    <script src="../layout.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

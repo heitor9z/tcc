@@ -8,37 +8,8 @@ body {
     min-height: 100vh;
 }
 
-/* --- Header Global --- */
-header {
-    background-color: #111;
-    border-bottom: 1px solid #27272a;
-    padding: 1.25rem 2rem;
-    position: sticky; top: 0; z-index: 10;
-}
-
-.header-container {
-    max-width: 1200px; margin: 0 auto;
-    display: flex; justify-content: space-between; align-items: center;
-}
-
-.logo { font-size: 1.5rem; font-weight: 700; color: #fff; }
-.text-blue { color: #3b82f6; }
-
-nav { display: flex; gap: 2rem; }
-nav a {
-    color: #a1a1aa; text-decoration: none; font-weight: 500; font-size: 0.9rem;
-    transition: color 0.2s;
-}
-nav a:hover, nav a.active { color: #fff; }
-
-.icon-btn {
-    background: none; border: 1px solid #3f3f46;
-    border-radius: 0.5rem; color: #fff;
-    width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
-    cursor: pointer; transition: background 0.2s;
-}
-.icon-btn:hover { background-color: #27272a; }
-.icon-btn svg { width: 20px; height: 20px; }
+/* --- Header Global (Espaçamento) --- */
+/* O estilo do header agora vem do global, aqui só ajustamos se precisar */
 
 /* --- Utilitários --- */
 .hidden { display: none !important; }
@@ -47,12 +18,17 @@ nav a:hover, nav a.active { color: #fff; }
    ESTILOS DO CATÁLOGO (index.html)
    ========================================= */
 
-main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+main { 
+    width: 95%; /* MUDANÇA AQUI: Ocupa quase toda a largura */
+    max-width: 1600px; /* Limite máximo bem largo para telas gigantes */
+    margin: 0 auto; 
+    padding: 2rem 0; /* Remove padding lateral pois width já controla */
+}
 
 /* Barra de Controles */
 .controls-area {
     display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
-    gap: 1rem; margin-bottom: 1.5rem;
+    gap: 1rem; margin-bottom: 2rem;
 }
 
 .search-wrapper { position: relative; flex-grow: 1; max-width: 600px; }
@@ -80,7 +56,9 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
 
 /* Grid de Produtos */
 .products-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    display: grid; 
+    /* Ajuste para caber mais itens se a tela for larga */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 2rem;
 }
 
@@ -89,13 +67,14 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
     background-color: #18181b; border: 1px solid #27272a;
     border-radius: 1rem; overflow: hidden;
     transition: transform 0.2s, box-shadow 0.2s;
+    display: flex; flex-direction: column;
 }
 .product-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
-.image-container { position: relative; height: 280px; width: 100%; cursor: pointer; }
+.image-container { position: relative; height: 320px; width: 100%; cursor: pointer; }
 .image-container img { width: 100%; height: 100%; object-fit: cover; }
 
 .tag-category {
@@ -117,7 +96,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
 .btn-favorite.favoritado svg { fill: #ef4444; stroke: #ef4444; }
 .btn-favorite svg { width: 16px; height: 16px; }
 
-.card-content { padding: 1.25rem; }
+.card-content { padding: 1.25rem; flex-grow: 1; display: flex; flex-direction: column; }
 .product-name { font-size: 1rem; font-weight: 600; color: #fff; margin-bottom: 0.5rem; cursor: pointer; }
 .product-price { font-size: 1.25rem; font-weight: 700; color: #3b82f6; margin-bottom: 1rem; }
 
@@ -131,7 +110,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
 }
 
 .btn-add-cart {
-    width: 100%; margin-top: 1rem;
+    width: 100%; margin-top: auto; /* Empurra botão pro final */
     background-color: #2563eb; color: #fff;
     border: none; padding: 0.75rem; border-radius: 0.5rem;
     font-weight: 600; cursor: pointer; transition: 0.2s;
@@ -203,7 +182,7 @@ main { max-width: 1200px; margin: 0 auto; padding: 2rem; }
     .detail-image { height: 350px; }
 }
 
-/* --- Seção de Avaliações (NOVO) --- */
+/* --- Seção de Avaliações --- */
 .reviews-section {
     margin-top: 80px;
     border-top: 1px solid #27272a;

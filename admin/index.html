@@ -26,7 +26,7 @@
                 
                 <button class="menu-btn" onclick="showTab('produtos', this)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
                     </svg>
                     Estoque
                 </button>
@@ -96,16 +96,25 @@
                             <div class="form-group"><label>Nome do Produto</label><input type="text" id="nome" required></div>
                             <div class="form-group"><label>Preço (R$)</label><input type="number" id="preco" step="0.01" required></div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group"><label>Categoria</label>
-                                <select id="categoria">
-                                    <option value="clothing">Roupas</option>
-                                    <option value="sneakers">Tênis</option>
-                                    <option value="accessories">Acessórios</option>
-                                </select>
+                        
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <div class="custom-select-wrapper" id="wrapper-categoria">
+                                <input type="hidden" id="categoria" name="categoria" value="" required>
+                                <div class="custom-select-trigger">
+                                    <span id="trigger-text-categoria" style="color: #a1a1aa;">Selecione uma categoria</span>
+                                    <div class="arrow"></div>
+                                </div>
+                                <div class="custom-options">
+                                    <div class="custom-option" data-value="clothing">Roupas</div>
+                                    <div class="custom-option" data-value="sneakers">Tênis</div>
+                                    <div class="custom-option" data-value="accessories">Acessórios</div>
+                                </div>
                             </div>
-                            <div class="form-group"><label>URL da Imagem</label><input type="text" id="imagem" required></div>
                         </div>
+
+                        <div class="form-group"><label>URL da Imagem</label><input type="text" id="imagem" required></div>
+                        
                         <div class="form-group"><label>Cores Disponíveis</label>
                             <div class="checkbox-group">
                                 <label class="chk-btn"><input type="checkbox" name="cor" value="#000000"> <span>Preto</span></label>
@@ -142,12 +151,21 @@
                 <div class="form-group"><label>Nome</label><input type="text" id="edit-nome" required></div>
                 <div class="form-row">
                     <div class="form-group"><label>Preço</label><input type="number" id="edit-preco" step="0.01" required></div>
-                    <div class="form-group"><label>Categoria</label>
-                        <select id="edit-categoria">
-                            <option value="clothing">Roupas</option>
-                            <option value="sneakers">Tênis</option>
-                            <option value="accessories">Acessórios</option>
-                        </select>
+                    
+                    <div class="form-group">
+                        <label>Categoria</label>
+                        <div class="custom-select-wrapper" id="wrapper-edit-categoria">
+                            <input type="hidden" id="edit-categoria" name="categoria" value="" required>
+                            <div class="custom-select-trigger">
+                                <span id="trigger-text-edit-categoria">Selecione...</span>
+                                <div class="arrow"></div>
+                            </div>
+                            <div class="custom-options">
+                                <div class="custom-option" data-value="clothing">Roupas</div>
+                                <div class="custom-option" data-value="sneakers">Tênis</div>
+                                <div class="custom-option" data-value="accessories">Acessórios</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group"><label>URL Imagem</label><input type="text" id="edit-imagem" required></div>
@@ -174,6 +192,28 @@
         </div>
     </div>
 
+    <div id="confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content admin-modal" style="max-width: 400px; text-align: center;">
+            <div style="margin-bottom: 20px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="none" viewBox="0 0 24 24" stroke="#ef4444" style="margin: 0 auto;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+            </div>
+            <h2 style="font-size: 1.4rem; margin-bottom: 10px; color: #fff;">Tem certeza?</h2>
+            <p style="color: #a1a1aa; margin-bottom: 25px; line-height: 1.5;">Essa ação removerá o produto permanentemente.<br>Não há como desfazer.</p>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button class="btn-cancel-modal" onclick="fecharModalConfirmacao()">Cancelar</button>
+                <button id="btn-confirm-delete" class="btn-danger-modal">Sim, Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="admin-toast" class="admin-toast">
+        <span id="toast-icon"></span>
+        <span id="toast-text">Mensagem</span>
+    </div>
+
+    <script src="../layout.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

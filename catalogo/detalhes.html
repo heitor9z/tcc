@@ -5,31 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Produto - Lowkey Drip</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <div class="header-container">
-            <div class="logo">LOWKEY <span class="text-blue">DRIP</span></div>
-            <nav>
-                <a href="index.html">Voltar ao Catálogo</a>
-            </nav>
-            <div class="header-actions">
-                <button class="icon-btn" onclick="window.location.href='../carrinho/index.html'">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </header>
+    <div id="main-header"></div>
 
     <main class="details-container">
         <div id="loading" class="loading-msg">Carregando produto...</div>
 
         <div id="product-content" class="product-detail-grid hidden">
-            
             <div class="detail-image">
                 <img id="prod-img" src="" alt="Produto">
             </div>
@@ -49,10 +35,7 @@
                     <span class="installments">em até 3x sem juros</span>
                 </div>
 
-                <p class="description">
-                    Este produto é exclusivo da coleção Lowkey Drip. Feito com materiais premium para garantir conforto e estilo no seu dia a dia.
-                </p>
-
+                <p class="description">Este produto é exclusivo da coleção Lowkey Drip.</p>
                 <div class="divider"></div>
 
                 <div class="selector-group">
@@ -66,9 +49,7 @@
                 </div>
 
                 <div class="action-area">
-                    <button id="btn-add-cart" class="btn-main-cart">
-                        Adicionar ao Carrinho
-                    </button>
+                    <button id="btn-add-cart" class="btn-main-cart">Adicionar ao Carrinho</button>
                 </div>
             </div>
         </div>
@@ -98,12 +79,13 @@
                 <button onclick="enviarAvaliacao()" class="btn-submit-review">Enviar Avaliação</button>
             </div>
 
-            <div id="comments-list" class="comments-list">
-                </div>
+            <div id="comments-list" class="comments-list"></div>
         </section>
-
     </main>
 
+    <div id="main-footer"></div>
+
+    <script src="../layout.js"></script>
     <script src="detalhes.js"></script>
 </body>
 </html>

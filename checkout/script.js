@@ -29,7 +29,7 @@ const descontoPix = 0.05;
 let totalFinalParaPix = 0; 
 let checkInterval = null; 
 
-// --- CLASSE PIX ---
+// --- CLASSE PIX (Mantida) ---
 class Pix {
     constructor(chave, nome, cidade, txid, valor) {
         this.chave = chave;
@@ -56,7 +56,6 @@ class Pix {
     }
 }
 
-// --- Renderização ---
 function renderCheckout() {
     itemsContainer.innerHTML = "";
     let subtotal = 0;
@@ -65,7 +64,6 @@ function renderCheckout() {
     carrinho.forEach(item => {
         const totalItem = item.preco * item.quantidade;
         subtotal += totalItem;
-        
         const cor = item.corEscolhida || "-";
         const tam = item.tamanhoEscolhido || "-";
 
@@ -91,7 +89,6 @@ function renderCheckout() {
     totalEl.innerText = `R$ ${totalFinal.toFixed(2)}`;
 }
 
-// --- Timer Visual ---
 let timerInterval;
 function startTimer() {
     let duration = 15 * 60; 
@@ -104,7 +101,6 @@ function startTimer() {
     }, 1000);
 }
 
-// --- MONITORAMENTO AUTOMÁTICO ---
 function monitorarPix(idTransacao) {
     if (checkInterval) clearInterval(checkInterval);
     checkInterval = setInterval(async () => {
@@ -121,7 +117,6 @@ function monitorarPix(idTransacao) {
     }, 3000);
 }
 
-// --- FINALIZAR COMPRA ---
 async function finalizarCompra() {
     const nome = document.getElementById("nome").value + " " + document.getElementById("sobrenome").value;
     const email = document.getElementById("email").value;
@@ -132,11 +127,10 @@ async function finalizarCompra() {
         cep: document.getElementById("cep").value
     };
 
-    // --- ATUALIZAÇÃO IMPORTANTE AQUI ---
     const usuarioId = localStorage.getItem("user_id");
 
     const pedidoData = {
-        usuario_id: usuarioId ? usuarioId : null, // Envia o ID se existir
+        usuario_id: usuarioId ? usuarioId : null,
         cliente: { nome, email },
         endereco: endereco,
         total: totalFinalParaPix,
@@ -158,14 +152,44 @@ async function finalizarCompra() {
     }
 }
 
-// --- Event Listeners ---
+// --- Event Listener Atualizado (Validação Visual) ---
 btnFinish.addEventListener("click", (e) => {
     e.preventDefault();
+    
     const inputs = document.querySelectorAll("input[required]");
-    let valid = true;
-    inputs.forEach(input => { if(!input.value) valid = false; });
-    if(!valid) { alert("Preencha todos os campos."); return; }
+    let hasError = false;
 
+    // Remove erros antigos
+    document.querySelectorAll('.input-error').forEach(el => el.classList.remove('input-error'));
+    document.querySelectorAll('.error-msg').forEach(el => el.remove());
+
+    // Valida cada campo manualmente
+    inputs.forEach(input => {
+        if (!input.value.trim()) {
+            // Usa a função visual do layout.js
+            if(window.mostrarErro) {
+                // Simula um erro de "valueMissing" para nossa função
+                input.setCustomValidity("Preencha este campo."); // Necessário para validade
+                window.mostrarErro(input);
+                input.setCustomValidity(""); // Reseta
+            } else {
+                // Fallback caso layout.js não tenha carregado
+                input.style.borderColor = "red";
+            }
+            hasError = true;
+        } else {
+            if(window.limparErro) window.limparErro(input);
+        }
+        
+        // Limpa erro ao digitar
+        input.addEventListener('input', () => {
+            if(window.limparErro) window.limparErro(input);
+        });
+    });
+
+    if (hasError) return; // Para aqui se tiver erro
+
+    // Se passou, gera PIX
     const ID_TRANSACAO = "LOD" + Math.floor(Math.random() * 100000);
     const pix = new Pix("test@lowkeydrip.com", "Lowkey Drip", "BRASILIA", ID_TRANSACAO, totalFinalParaPix);
     const payload = pix.getPayload();

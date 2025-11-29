@@ -4,59 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Carrinho - Lowkey Drip</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <header>
-        <a href="../catalogo/index.html" class="back-link">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Voltar ao Catálogo
-        </a>
-        
-        <h1>Meu Carrinho</h1>
-        <div style="width: 140px;"></div> 
-    </header>
+    <div id="main-header"></div>
 
-    <main class="cart-container">
+    <main class="cart-container" style="margin-top:40px;">
         <div class="cart-items" id="cartItemsContainer">
             <p class="empty-msg">Seu carrinho está vazio.</p>
         </div>
 
         <div class="cart-summary">
             <h2>Resumo do Pedido</h2>
-            
-            <div class="summary-row">
-                <span>Subtotal</span>
-                <span id="subtotal">R$ 0.00</span>
-            </div>
-            
-            <div class="summary-row">
-                <span>Frete</span>
-                <span id="frete">R$ 0.00</span>
-            </div>
-            
+            <div class="summary-row"><span>Subtotal</span><span id="subtotal">R$ 0.00</span></div>
+            <div class="summary-row"><span>Frete</span><span id="frete">R$ 0.00</span></div>
             <div class="divider"></div>
-            
-            <div class="summary-row total">
-                <span>Total</span>
-                <span id="total" class="text-blue">R$ 0.00</span>
-            </div>
-
-            <button id="btn-finalize" class="btn-checkout">
-                Finalizar Compra
-            </button>
-            
-            <button class="btn-continue" onclick="window.location.href='../catalogo/index.html'">
-                Continuar Comprando
-            </button>
+            <div class="summary-row total"><span>Total</span><span id="total" class="text-blue">R$ 0.00</span></div>
+            <button id="btn-finalize" class="btn-checkout">Finalizar Compra</button>
+            <button class="btn-continue" onclick="window.location.href='../catalogo/index.html'">Continuar Comprando</button>
         </div>
     </main>
 
+    <div id="main-footer"></div>
+
+    <script src="../layout.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
