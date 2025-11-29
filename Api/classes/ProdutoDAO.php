@@ -1,5 +1,5 @@
 <?php
-require_once 'Produto.php';
+// Api/classes/ProdutoDAO.php
 
 class ProdutoDAO {
     private $pdo;
@@ -26,8 +26,6 @@ class ProdutoDAO {
         $stmt->bindValue(':tamanhos', json_encode($tamanhos));
         return $stmt->execute();
     }
-
-    // --- NOVOS MÉTODOS ---
 
     public function atualizar($id, $nome, $categoria, $preco, $imagem, $cores, $tamanhos) {
         $sql = "UPDATE produtos SET nome = :nome, categoria = :categoria, preco = :preco, 

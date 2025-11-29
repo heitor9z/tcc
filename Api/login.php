@@ -1,16 +1,13 @@
 <?php
-// Api/login.php SIMPLIFICADO
-
+// Api/login.php
 require_once 'classes/Conexao.php';
 require_once 'classes/UsuarioDAO.php';
 
-// Permite acesso de qualquer origem (Corrige erro de CORS)
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
-// Se for apenas uma verificação do navegador (OPTIONS), para aqui
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
     exit;
@@ -35,21 +32,19 @@ try {
         exit;
     }
 
-    // Verifica a senha (compatível com o registro que criamos)
     if (!password_verify($data->password, $user['password'])) {
         http_response_code(401);
         echo json_encode(["message" => "Senha incorreta."]);
         exit;
     }
 
-    // Login Sucesso! (Sem JWT por enquanto para evitar erros de biblioteca)
-    // Retornamos um token falso simples ou o ID do usuário
+    // Login Sucesso! Retornamos apenas os dados necessários para a sessão no front
     http_response_code(200);
     echo json_encode([
         "message" => "Login realizado com sucesso!",
         "user_id" => $user['id'],
         "user_name" => $user['displayName'],
-        "token" => "token_simples_para_teste_" . time() 
+        "is_admin" => $user['is_admin'] // Dica: Útil se quiser validar admin no front
     ]);
 
 } catch (Exception $e) {

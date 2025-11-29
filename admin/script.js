@@ -1,3 +1,5 @@
+// admin/script.js
+
 const API_URL = "http://localhost/tcc/api";
 let listaProdutosGlobal = [];
 let idParaDeletar = null;
@@ -35,9 +37,7 @@ function setupCustomSelect(wrapperId, inputId, textId) {
             textSpan.innerText = option.innerText;
             textSpan.style.color = "#fff";
             
-            // Remove borda vermelha se tiver
             wrapper.querySelector('.custom-select-trigger').style.borderColor = "#3f3f46";
-            
             wrapper.classList.remove('open');
         });
     });
@@ -50,17 +50,15 @@ function mostrarErroSelect(wrapperId) {
     const wrapper = document.getElementById(wrapperId);
     const trigger = wrapper.querySelector('.custom-select-trigger');
     trigger.style.borderColor = "#ef4444";
-    // Efeito shake
     wrapper.classList.add('input-error');
     setTimeout(() => wrapper.classList.remove('input-error'), 500);
 }
 
-// --- Forms Submit ---
+// --- Forms Submit (Criar Produto) ---
 document.getElementById("product-form").addEventListener("submit", async (e) => {
     e.preventDefault();
     let hasError = false;
 
-    // 1. Validação de Inputs Normais
     if (!e.target.checkValidity()) {
         const inputs = e.target.querySelectorAll('input:not([type="hidden"]), select, textarea');
         inputs.forEach(input => {
@@ -69,14 +67,12 @@ document.getElementById("product-form").addEventListener("submit", async (e) => 
         hasError = true;
     }
 
-    // 2. Validação da Categoria (Select Customizado)
     const categoria = document.getElementById("categoria").value;
     if (!categoria) {
         mostrarErroSelect("wrapper-categoria");
         hasError = true;
     }
 
-    // 3. Validação de Cores e Tamanhos
     const cores = []; document.querySelectorAll('input[name="cor"]:checked').forEach(c => cores.push(c.value));
     const tamanhos = []; document.querySelectorAll('input[name="tamanho"]:checked').forEach(t => tamanhos.push(t.value));
 
@@ -101,23 +97,26 @@ document.getElementById("product-form").addEventListener("submit", async (e) => 
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ nome, preco, categoria, imagem, cores, tamanhos })
         });
-        showToast("Produto cadastrado com sucesso!");
+        // Usa a showToast GLOBAL do layout.js
+        if(window.showToast) window.showToast("Produto cadastrado com sucesso!");
+        
         carregarDados();
         document.getElementById("product-form").reset();
         document.getElementById("trigger-text-categoria").innerText = "Selecione uma categoria";
         document.getElementById("trigger-text-categoria").style.color = "#a1a1aa";
         document.querySelectorAll('.error-msg-chk').forEach(e => e.remove());
-    } catch (error) { showToast("Erro ao criar.", "error"); }
+    } catch (error) { 
+        if(window.showToast) window.showToast("Erro ao criar.", "error"); 
+    }
 });
 
-// Edit Form segue a mesma lógica...
+// --- Forms Submit (Editar Produto) ---
 document.getElementById('edit-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     let hasError = false;
 
     if (!e.target.checkValidity()) {
         hasError = true;
-        // Mostra erros inputs normais se layout.js estiver carregado
     }
 
     const categoria = document.getElementById("edit-categoria").value;
@@ -151,27 +150,15 @@ document.getElementById('edit-form').addEventListener('submit', async (e) => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id, nome, preco, categoria, imagem, cores, tamanhos })
         });
-        showToast("Produto atualizado!");
+        if(window.showToast) window.showToast("Produto atualizado!");
         closeEditModal();
         carregarDados();
-    } catch(err) { showToast("Erro ao atualizar.", "error"); }
+    } catch(err) { 
+        if(window.showToast) window.showToast("Erro ao atualizar.", "error"); 
+    }
 });
 
-// --- Outras Funções (Navegação, Load, Toast) ---
-function showToast(msg, type = 'success') {
-    const toast = document.getElementById('admin-toast');
-    if(!toast) return; // Fallback se não tiver no HTML
-    document.getElementById('toast-text').innerText = msg;
-    document.getElementById('toast-icon').innerHTML = type === 'success' ? '✅' : '❌';
-    toast.className = `admin-toast show ${type}`;
-    setTimeout(() => toast.classList.remove('show'), 3000);
-}
-
-// ... Restante do código (showTab, carregarDados, renderizar, modais) mantém igual ao anterior ...
-// Copie o restante das funções (abrirModalEdicao, deletarProduto, etc) do arquivo anterior
-// Apenas substitua a parte do setupCustomSelect e os Submit Listeners por estes acima.
-
-// Código completo para garantir:
+// --- Navegação e Carregamento ---
 window.showTab = function(tabName, btnElement) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
     document.querySelectorAll('.menu-btn').forEach(el => el.classList.remove('active'));
@@ -213,8 +200,8 @@ function renderizarPedidos(pedidos) {
 window.atualizarStatus = async function(id, novoStatus) {
     try {
         await fetch(`${API_URL}/atualizar_pedido.php`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id, status: novoStatus }) });
-        showToast("Status atualizado!");
-    } catch(e) { showToast("Erro.", "error"); }
+        if(window.showToast) window.showToast("Status atualizado!");
+    } catch(e) { if(window.showToast) window.showToast("Erro.", "error"); }
 }
 
 function renderizarProdutos(produtos) {
@@ -233,7 +220,7 @@ window.deletarProduto = function(id) { idParaDeletar = id; document.getElementBy
 window.fecharModalConfirmacao = function() { idParaDeletar = null; document.getElementById('confirm-modal').classList.add('hidden'); }
 document.getElementById('btn-confirm-delete').addEventListener('click', async () => {
     if (!idParaDeletar) return;
-    try { await fetch(`${API_URL}/deletar_produto.php`, { method: "POST", body: JSON.stringify({ id: idParaDeletar }) }); fecharModalConfirmacao(); carregarDados(); showToast("Excluído."); } catch(e) { showToast("Erro.", "error"); }
+    try { await fetch(`${API_URL}/deletar_produto.php`, { method: "POST", body: JSON.stringify({ id: idParaDeletar }) }); fecharModalConfirmacao(); carregarDados(); if(window.showToast) window.showToast("Excluído."); } catch(e) { if(window.showToast) window.showToast("Erro.", "error"); }
 });
 
 window.abrirModalEdicao = function(id) {
@@ -269,4 +256,3 @@ function mostrarErroCustomizado(elementName, formId, msg) {
     span.innerText = msg;
     container.appendChild(span);
 }
-function limparErrosCustomizados() { document.querySelectorAll('.error-msg-chk').forEach(e => e.remove()); }
