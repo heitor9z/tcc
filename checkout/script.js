@@ -1,7 +1,6 @@
 // checkout/script.js
 
 // --- TRAVA DE SEGURANÇA ---
-// Se não tiver email salvo, chuta pro login imediatamente
 if (!localStorage.getItem("user_email")) {
     alert("Acesso negado. Faça login primeiro.");
     window.location.href = "../login/index.html";
@@ -26,7 +25,7 @@ const timerEl = document.getElementById("timer");
 // --- Dados do Pedido ---
 const carrinho = JSON.parse(localStorage.getItem('drip_carrinho')) || [];
 const frete = 12.99;
-const descontoPix = 0.05; // 5%
+const descontoPix = 0.05; 
 let totalFinalParaPix = 0; 
 let checkInterval = null; 
 
@@ -133,7 +132,11 @@ async function finalizarCompra() {
         cep: document.getElementById("cep").value
     };
 
+    // --- ATUALIZAÇÃO IMPORTANTE AQUI ---
+    const usuarioId = localStorage.getItem("user_id");
+
     const pedidoData = {
+        usuario_id: usuarioId ? usuarioId : null, // Envia o ID se existir
         cliente: { nome, email },
         endereco: endereco,
         total: totalFinalParaPix,

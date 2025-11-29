@@ -1,3 +1,5 @@
+// meus_pedidos/script.js
+
 const API_URL = "http://localhost/tcc/api";
 const listContainer = document.getElementById("orders-list");
 const userGreeting = document.getElementById("user-greeting");
@@ -25,8 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function fetchPedidos(email) {
+    // --- ATUALIZAÇÃO: Recupera o ID também ---
+    const userId = localStorage.getItem("user_id") || 0;
+
     try {
-        const res = await fetch(`${API_URL}/meus_pedidos.php?email=${email}`);
+        // Envia email E id para o backend
+        const res = await fetch(`${API_URL}/meus_pedidos.php?email=${email}&id=${userId}`);
         const pedidos = await res.json();
 
         renderizarPedidos(pedidos);

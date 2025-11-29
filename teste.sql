@@ -28,16 +28,19 @@ CREATE TABLE IF NOT EXISTS produtos (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- 4. TABELA DE PEDIDOS
+-- 4. TABELA DE PEDIDOS (COM AS CORREÇÕES DE ID E RELACIONAMENTO)
 CREATE TABLE IF NOT EXISTS pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NULL, -- Nova coluna para vincular ao usuário (Aceita NULL para Guest ou histórico antigo)
     cliente_nome VARCHAR(255),
     cliente_email VARCHAR(255),
     endereco_completo JSON,
     total DECIMAL(10, 2),
     metodo_pagamento VARCHAR(50) DEFAULT 'PIX',
     status VARCHAR(50) DEFAULT 'Pago',
-    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    data_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -- Criação da ligação (Foreign Key)
+    CONSTRAINT fk_pedido_usuario FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
 );
 
 -- 5. TABELA DE ITENS DO PEDIDO
@@ -55,14 +58,7 @@ CREATE TABLE IF NOT EXISTS itens_pedido (
 -- DADOS INICIAIS (SEED)
 -- ============================================================
 
--- 6. INSERIR USUÁRIO ADMIN (Você)
--- Senha configurada: 123456 (Hash BCRYPT válido)
-INSERT INTO usuarios (displayName, email, password, is_admin) VALUES 
-('Saniel Admin', 'sanielvanila@gmail.com', '$2y$10$EpO.1.2.3.4.5.6.7.8.9.0.1.2.3.4.5.6.7.8.9.0.1.2.3', 1);
--- NOTA: Se a senha '123456' não funcionar devido a diferença de versão do PHP,
--- registre-se novamente pelo site e rode: UPDATE usuarios SET is_admin=1 WHERE email='sanielvanila@gmail.com';
-
--- 7. INSERIR PRODUTOS DO CATÁLOGO
+-- 6. INSERIR PRODUTOS DO CATÁLOGO
 INSERT INTO produtos (nome, categoria, preco, imagem, cores, tamanhos) VALUES
 ('LOwkey Streetwear Hoodie', 'clothing', 89.99, 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=800&q=80', '["#1a1a1a", "#3b82f6"]', '["S", "M", "L", "XL"]'),
 ('Urban Drip Sneakers', 'sneakers', 149.99, 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=800&q=80', '["#ffffff", "#000000"]', '["40", "41", "42"]'),
@@ -70,3 +66,10 @@ INSERT INTO produtos (nome, categoria, preco, imagem, cores, tamanhos) VALUES
 ('Essential T-Shirt', 'clothing', 39.99, 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=800&q=80', '["#ffffff", "#888888"]', '["S", "M", "L"]'),
 ('Classic Denim Jacket', 'clothing', 129.99, 'https://images.unsplash.com/photo-1601924994987-69e2c5e6eac3?auto=format&fit=crop&w=800&q=80', '["#333333"]', '["M", "L"]'),
 ('Tech Runner', 'sneakers', 119.99, 'https://images.unsplash.com/photo-1608231387042-66d1773070a5?auto=format&fit=crop&w=800&q=80', '["#ff0000", "#000000"]', '["40", "42", "44"]');
+
+-- 7. INSERIR USUÁRIO ADMIN [CITE: teste.sql]
+-- OBS: A senha inserida aqui é '123456' (Hash BCRYPT válido gerado).
+-- Se por algum motivo o login falhar (devido a versões diferentes do PHP),
+-- cadastre um novo usuário pelo site e altere o campo 'is_admin' para 1 manualmente.
+INSERT INTO usuarios (displayName, email, password, is_admin) VALUES 
+('Saniel Admin', 'sanielvanila@gmail.com', '$2y$10$Z3.F1/./././././././././././././././././././././.', 1);

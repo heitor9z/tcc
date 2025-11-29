@@ -5,10 +5,11 @@ require_once 'classes/Conexao.php';
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-// Pega o email da URL (ex: meus_pedidos.php?email=joao@gmail.com)
+// Recebe email e ID
 $email = $_GET['email'] ?? '';
+$id = $_GET['id'] ?? 0;
 
-if(empty($email)) {
+if(empty($email) && empty($id)) {
     echo json_encode([]);
     exit;
 }
@@ -16,9 +17,14 @@ if(empty($email)) {
 try {
     $pdo = (new Conexao())->conectar();
     
-    // Busca pedidos deste email
-    $sql = "SELECT * FROM pedidos WHERE cliente_email = :email ORDER BY id DESC";
+    // --- ATUALIZAÇÃO: Busca Híbrida ---
+    // Busca por usuario_id (novos pedidos vinculados) OU cliente_email (pedidos antigos ou guest)
+    $sql = "SELECT * FROM pedidos 
+            WHERE usuario_id = :id OR cliente_email = :email 
+            ORDER BY id DESC";
+            
     $stmt = $pdo->prepare($sql);
+    $stmt->bindValue(':id', $id);
     $stmt->bindValue(':email', $email);
     $stmt->execute();
     $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
